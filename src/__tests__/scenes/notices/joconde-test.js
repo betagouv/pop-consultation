@@ -5,14 +5,10 @@ import Joconde from '../../../scenes/notice/joconde';
 
 describe('Joconde suite', () => {
   it('should render work with a notice', () => {
-    let wrapper = shallow(<Joconde match={{params: {ref: "lorem"}, isExact: true, path: "", url: ""}} />);
-    /*
-    wrapper.instance().load = jest.fn(function(ref) {
-      this.setState({ loading: false, notice: {TICO: 'the TICO value'} });
+    Joconde.prototype.load = jest.fn(function(_ref) {
+      this.setState({ loading: false, notice: {TICO: 'the TICO value', IMG: []} });
     });
-    wrapper.setProps({match: {params: {ref: "lol"}}, images: [] });
-    wrapper.update();
-    expect(wrapper.html()).toBe('dsjdsdjs')
-    */
+    let wrapper = shallow(<Joconde match={{params: {ref: "lorem"}, isExact: true, path: "", url: ""}} />);
+    expect(wrapper.text()).contains('the TICO value');
   });
 });
