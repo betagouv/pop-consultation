@@ -9,6 +9,6 @@ describe('Joconde suite', () => {
       this.setState({ loading: false, notice: {TICO: 'the TICO value', IMG: []} });
     });
     let wrapper = shallow(<Joconde match={{params: {ref: "lorem"}, isExact: true, path: "", url: ""}} />);
-    expect(wrapper.text()).contains('the TICO value');
+    expect(wrapper.find('.heading').text()).toContain('the TICO value')
   });
 });
