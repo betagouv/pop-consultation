@@ -4,7 +4,7 @@ import { Row, Col, Container } from 'reactstrap';
 import Joconde from '../../../scenes/notice/joconde';
 
 describe('Joconde suite', () => {
-  it('should render work with a notice', () => {
+  it('should work with a notice', () => {
     Joconde.prototype.load = jest.fn(function(_ref) {
       this.setState({ loading: false, notice: {TICO: 'the TICO value', IMG: []} });
     });
