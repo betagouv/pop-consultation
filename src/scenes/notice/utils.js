@@ -49,7 +49,7 @@ export function toFieldImages(images) {
 export function hasCoordinates(point) {
     return !!(
       point &&
-      point.coordinates &&
-      point.coordinates.length
+      point.lat &&
+      point.lon
     );
 }
