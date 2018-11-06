@@ -7,10 +7,9 @@ import { toFieldImages, hasCoordinates } from "../utils";
 export default class Header extends React.Component {
   render() {
     const images = toFieldImages(this.props.images);
-    const showMap = hasCoordinates(this.props.notice.POP_COORDINATES_POINT);
+    const showMap = hasCoordinates(this.props.notice.POP_COORDONNEES);
     const showImages = images.length;
     const cols = [];
-    console.log(showMap, showImages);
     if (!showMap && !showImages) {
       return <div />;
     }
