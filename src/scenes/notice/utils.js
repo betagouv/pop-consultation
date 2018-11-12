@@ -25,10 +25,6 @@ export function postFixedLink(link) {
     );
 }
 
-export function postEmail(email) {
-  return email.replace(/^<a href=.mailto:([^?]+).*$/i, "$1");
-}
-
 export function toFieldImages(images) {
   return images
     .map(e => {
