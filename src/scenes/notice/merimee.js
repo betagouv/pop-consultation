@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
 import Field from "./components/field";
-import LinkedNotices from "./components/linkedNotices";
+import LinkedNotices from "./components/LinkedNotices";
 import Header from "./components/header";
 import Title from "./components/title";
 import Loader from "../../components/loader";
@@ -46,15 +46,19 @@ class Notice extends React.Component {
       const arr = [];
       for (let i = 0; i < RENV.length; i++) {
         arr.push(API.getNotice("merimee", RENV[i]));
+        if (arr.length > 50) break;
       }
       for (let i = 0; i < REFP.length; i++) {
         arr.push(API.getNotice("merimee", REFP[i]));
+        if (arr.length > 50) break;
       }
       for (let i = 0; i < REFE.length; i++) {
         arr.push(API.getNotice("merimee", REFE[i]));
+        if (arr.length > 50) break;
       }
       for (let i = 0; i < REFO.length; i++) {
         arr.push(API.getNotice("palissy", REFO[i]));
+        if (arr.length > 50) break;
       }
       Promise.all(arr).then(values => {
         const links = [];

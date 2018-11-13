@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col, Container } from "reactstrap";
 import Field from "./components/field";
 import NotFound from "./components/not-found";
-import LinkedNotices from "./components/linkedNotices";
+import LinkedNotices from "./components/LinkedNotices";
 import Title from "./components/title";
 import Loader from "../../components/loader";
 import Header from "./components/header";
@@ -37,20 +37,19 @@ class Notice extends React.Component {
     API.getNotice("palissy", ref).then(notice => {
       this.setState({ loading: false, notice });
 
-      const { RENV, REFP, REFE, REFA, LBASE2 } = notice;
+      const { RENV, REFP, REFE, REFA, LBASE2, REF } = notice;
       // RENV -> MERIMEE
       // REFP -> MERIMEE
       // REFE -> MERIMEE
       // REFA -> MERIMEE
       // LBASE2 -> MERIMEE
       const arr = [];
-      const l = [...RENV, ...REFP, ...REFE, ...REFA, LBASE2];
-      for (let i = 0; i < l.length; i++) {
-        if (l[i]) {
-          const collection = findCollection(l[i]);
-          arr.push(API.getNotice(collection, l[i]));
-        }
-      }
+      [...RENV, ...REFP, ...REFE, ...REFA, LBASE2]
+        .filter(e => e && e != REF)
+        .forEach(e => {
+          const collection = findCollection(e);
+          arr.push(API.getNotice(collection, e));
+        });
 
       Promise.all(arr).then(values => {
         const links = [];

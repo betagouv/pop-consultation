@@ -57,7 +57,9 @@ class Notice extends React.Component {
             </div>
           </Col> */}
           <Col>
-            <h1 className="heading">{this.state.notice.TICO || this.state.notice.TITR}</h1>
+            <h1 className="heading">
+              {this.state.notice.TICO || this.state.notice.TITR}
+            </h1>
           </Col>
         </Row>
         <Row>
@@ -81,6 +83,7 @@ class Notice extends React.Component {
                   <Field
                     title="Auteur / exécutant / collecteur :"
                     content={this.state.notice.AUTR}
+                    separator="#"
                   />
                   <Field
                     title="Precisions auteur :"
@@ -89,6 +92,7 @@ class Notice extends React.Component {
                   <Field
                     title="Anciennes attributions :"
                     content={this.state.notice.ATTR}
+                    separator="#"
                   />
                   <Field
                     title="Ancienne attribution :"
@@ -131,6 +135,7 @@ class Notice extends React.Component {
                   <Field
                     title="Inscriptions :"
                     content={this.state.notice.INSC}
+                    separator="#"
                   />
                   <Field title="Genèse :" content={this.state.notice.GENE} />
                   <Field
@@ -150,10 +155,12 @@ class Notice extends React.Component {
                   <Field
                     title="Observations :"
                     content={this.state.notice.OBSE}
+                    separator="#"
                   />
                   <Field
                     title="Autres numéros :"
                     content={this.state.notice.NUMS}
+                    separator="#"
                   />
                   <Field
                     title="Marquages :"
@@ -178,7 +185,11 @@ class Notice extends React.Component {
                     content={this.state.notice.BIBL}
                     separator="#"
                   />
-                  <Field title="Notes :" content={this.state.notice.NOTE} />
+                  <Field
+                    title="Notes :"
+                    content={this.state.notice.NOTE}
+                    separator="#"
+                  />
                   <Field title="Résumé :" content={this.state.notice.RESUME} />
                   <Field
                     title="Etat de conservation :"
