@@ -13,7 +13,7 @@ app.use(express.static(path.join(__dirname, "/../../sitemap")));
 // Sitemap redirection
 app.get("/sitemap/*", (req, res) => {
   const url = req.url.replace("/sitemap/", "");
-  res.redirect(`https://s3.eu-west-3.amazonaws.com/pop-sitemap/${url}`);
+  res.redirect(301, `https://s3.eu-west-3.amazonaws.com/pop-sitemap/${url}`);
 });
 
 app.route("*").all((req, res) => {
