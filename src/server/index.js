@@ -14,6 +14,7 @@ app.use(
   forceDomain({
     hostname: "www.pop.culture.gouv.fr",
     excludeRule: /elasticbeanstalk\.com/i
+    // For later add: `protocol: 'https'`
   })
 );
 
