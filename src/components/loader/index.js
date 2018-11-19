@@ -1,5 +1,5 @@
 import React from 'react';
-import './index.css';
+// import './index.css';
 
 export default ({isOpen = true}) => isOpen?(
    <div className='loader-container'>

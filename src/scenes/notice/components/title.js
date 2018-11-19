@@ -1,5 +1,5 @@
 import React from "react";
-import "./title.css";
+// import "./title.css";
 
 
 export default class Title extends React.Component {

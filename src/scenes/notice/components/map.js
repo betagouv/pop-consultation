@@ -1,6 +1,6 @@
 import React from "react";
 
-import "./map.css";
+// import "./map.css";
 
 export default class MapComponent extends React.Component {
   state = {

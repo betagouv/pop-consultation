@@ -1,11 +1,11 @@
-require('es6-promise').polyfill();
-require('isomorphic-fetch');
+require("es6-promise").polyfill();
+require("isomorphic-fetch");
 
-
-const { api_url } = require('../config.js');
+const { api_url } = require("../config.js");
 
 class api {
   getNotice(collection, ref) {
+    console.log("GET NTOICE");
     return new Promise((resolve, reject) => {
       this._get(`${api_url}/${collection}/${ref}`)
         .then(notice => {
@@ -17,6 +17,7 @@ class api {
   }
 
   _get(url) {
+    console.log("GET", url);
     return new Promise((resolve, reject) => {
       fetch(url)
         .then(response => {
@@ -34,7 +35,7 @@ class api {
               })
               .catch(e => {
                 Raven.captureException(e);
-                reject('Probleme lors de la récupération de la donnée', e);
+                reject("Probleme lors de la récupération de la donnée", e);
               });
             return;
           }
@@ -48,7 +49,8 @@ class api {
           return;
         })
         .catch(err => {
-          Raven.captureException(err);
+          console.log("ERR", err);
+          // Raven.captureException(err);
           reject("L'api est inaccessible", err);
         });
     });

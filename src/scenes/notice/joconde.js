@@ -8,7 +8,7 @@ import API from "../../services/api";
 import NotFound from "../../components/NotFound";
 import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
-import "./index.css";
+// import "./index.css";
 
 class Notice extends React.Component {
   state = {
@@ -18,35 +18,14 @@ class Notice extends React.Component {
     links: []
   };
 
-  componentWillMount() {
-    this.load(this.props.match.params.ref);
-  }
+  async componentWillMount() {
+    console.log("hey", this.props);
 
-  componentWillReceiveProps(newProps) {
-    if (
-      this.props.match &&
-      this.props.match.params.ref !== newProps.match.params.ref
-    ) {
-      this.load(newProps.match.params.ref);
-    }
-  }
-
-  load(ref) {
-    this.setState({ loading: true });
-    API.getNotice("joconde", ref).then(notice => {
-      this.setState({
-        loading: false,
-        notice
-      });
-    });
   }
 
   render() {
-    if (this.state.loading) {
-      return <Loader />;
-    }
 
-    if (!this.state.notice) {
+    if (!this.props.notice) {
       return <NotFound />;
     }
 
@@ -54,22 +33,22 @@ class Notice extends React.Component {
       <Container className="notice" fluid>
         <Row className="top-section">
           <Col>
-            <h1 className="heading">{this.state.notice.TICO}</h1>
+            <h1 className="heading">{this.props.notice.TICO}</h1>
           </Col>
         </Row>
         <Row>
           <Col sm="9">
             <Header
-              notice={this.state.notice}
+              notice={this.props.notice}
               externalImages={false}
-              images={this.state.notice.IMG}
+              images={this.props.notice.IMG}
             />
             <Row>
               <Col sm="12">
                 <div className="notice-details">
                   <Title
                     content="Identification du bien culturel"
-                    notice={this.state.notice}
+                    notice={this.props.notice}
                     fields={[
                       "INV",
                       "DOMN",
@@ -100,96 +79,96 @@ class Notice extends React.Component {
 
                   <Field
                     title="N°Inventaire, ancien(s) numéros(s), autres numéros, N° de dépôt :"
-                    content={this.state.notice.INV}
+                    content={this.props.notice.INV}
                   />
                   <Field
                     title="Domaine (catégorie du bien) :"
-                    content={this.state.notice.DOMN}
+                    content={this.props.notice.DOMN}
                   />
                   <Field
                     title="Dénomination du bien : "
-                    content={this.state.notice.DENO}
+                    content={this.props.notice.DENO}
                   />
                   <Field
                     title="Appellation :"
-                    content={this.state.notice.APPL}
+                    content={this.props.notice.APPL}
                   />
-                  <Field title="Titre :" content={this.state.notice.TITR} />
+                  <Field title="Titre :" content={this.props.notice.TITR} />
                   <Field
                     title="Auteur / exécutant / collecteur :"
-                    content={this.state.notice.AUTR}
+                    content={this.props.notice.AUTR}
                   />
                   <Field
                     title="Précisions / auteur / exécutant / collecteur :"
-                    content={this.state.notice.PAUT}
+                    content={this.props.notice.PAUT}
                   />
-                  <Field title="Ecole :" content={this.state.notice.ECOL} />
+                  <Field title="Ecole :" content={this.props.notice.ECOL} />
                   <Field
                     title="Anciennes attributions :"
-                    content={this.state.notice.ATTR}
+                    content={this.props.notice.ATTR}
                   />
                   <Field
                     title="Période de création / exécution :"
-                    content={this.state.notice.PERI}
+                    content={this.props.notice.PERI}
                   />
                   <Field
                     title="Millésime de création / exécution :"
-                    content={this.state.notice.MILL}
+                    content={this.props.notice.MILL}
                   />
 
                   <Field
                     title="Epoque / style / mouvement :"
-                    content={this.state.notice.EPOQ}
+                    content={this.props.notice.EPOQ}
                   />
                   <Field
                     title="Période de l’original copié :"
-                    content={this.state.notice.PEOC}
+                    content={this.props.notice.PEOC}
                   />
                   <Field
                     title="Matériaux et techniques :"
-                    content={this.state.notice.TECH}
+                    content={this.props.notice.TECH}
                   />
-                  <Field title="Mesures :" content={this.state.notice.DIMS} />
+                  <Field title="Mesures :" content={this.props.notice.DIMS} />
                   <Field
                     title="Inscriptions :"
-                    content={this.state.notice.INSC}
+                    content={this.props.notice.INSC}
                   />
                   <Field
                     title="Précisions sur les inscriptions :"
-                    content={this.state.notice.PINS}
+                    content={this.props.notice.PINS}
                   />
                   <Field
                     title="Onomastique :"
-                    content={this.state.notice.ONOM}
+                    content={this.props.notice.ONOM}
                   />
                   <Field
                     title="Description :"
-                    content={this.state.notice.DESC}
+                    content={this.props.notice.DESC}
                   />
                   <Field
                     title="Etat du bien :"
-                    content={this.state.notice.ETAT}
+                    content={this.props.notice.ETAT}
                   />
                   <Field
                     title="Sujet représenté :"
-                    content={this.state.notice.REPR}
+                    content={this.props.notice.REPR}
                     separator="#"
                   />
                   <Field
                     title="Précisions sur le sujet représenté :"
-                    content={this.state.notice.PREP}
+                    content={this.props.notice.PREP}
                   />
                   <Field
                     title="Date de la représentation :"
-                    content={this.state.notice.DREP}
+                    content={this.props.notice.DREP}
                   />
                   <Field
                     title="Source de la représentation :"
-                    content={this.state.notice.SREP}
+                    content={this.props.notice.SREP}
                   />
                   <Title
                     content="Contexte historique"
-                    notice={this.state.notice}
+                    notice={this.props.notice}
                     fields={[
                       "GENE",
                       "HIST",
@@ -205,54 +184,54 @@ class Notice extends React.Component {
                       "NSDA"
                     ]}
                   />
-                  <Field title="Genèse :" content={this.state.notice.GENE} />
+                  <Field title="Genèse :" content={this.props.notice.GENE} />
                   <Field
                     title="Historique – Objets associés :"
-                    content={this.state.notice.HIST}
+                    content={this.props.notice.HIST}
                   />
                   <Field
                     title="Lieu de création / d’exécution / d’utilisation :"
-                    content={this.state.notice.LIEUX}
+                    content={this.props.notice.LIEUX}
                   />
                   <Field
                     title="Précisions sur le lieu de création / d’exécution / d’utilisation :"
-                    content={this.state.notice.PLIEUX}
+                    content={this.props.notice.PLIEUX}
                   />
                   <Field
                     title="Géographie historique :"
-                    content={this.state.notice.GEOHI}
+                    content={this.props.notice.GEOHI}
                   />
                   <Field
                     title="Utilisation / Destination :"
-                    content={this.state.notice.UTIL}
+                    content={this.props.notice.UTIL}
                   />
                   <Field
                     title="Précisions sur l’utilisation :"
-                    content={this.state.notice.PUTI}
+                    content={this.props.notice.PUTI}
                   />
                   <Field
                     title="Période d’utilisation :"
-                    content={this.state.notice.PERU}
+                    content={this.props.notice.PERU}
                   />
                   <Field
                     title="Millésime d’utilisation :"
-                    content={this.state.notice.MILU}
+                    content={this.props.notice.MILU}
                   />
                   <Field
                     title="Découverte / collecte :"
-                    content={this.state.notice.DECV}
+                    content={this.props.notice.DECV}
                   />
                   <Field
                     title="Précisions sur la découverte / collecte / récolte :"
-                    content={this.state.notice.PDEC}
+                    content={this.props.notice.PDEC}
                   />
                   <Field
                     title="Numéro de site :"
-                    content={this.state.notice.NSDA}
+                    content={this.props.notice.NSDA}
                   />
                   <Title
                     content="Informations juridiques"
-                    notice={this.state.notice}
+                    notice={this.props.notice}
                     fields={[
                       "STAT",
                       "DACQ",
@@ -265,49 +244,49 @@ class Notice extends React.Component {
                   />
                   <Field
                     title="Statut juridique :"
-                    content={this.state.notice.STAT}
+                    content={this.props.notice.STAT}
                   />
                   <Field
                     title="Date d’acquisition :"
-                    content={this.state.notice.DACQ}
+                    content={this.props.notice.DACQ}
                   />
                   <Field
                     title="Ancienne appartenance :"
-                    content={this.state.notice.APTN}
+                    content={this.props.notice.APTN}
                   />
                   <Field
                     title="Dépôt / établissement dépositaire :"
-                    content={this.state.notice.DEPO}
+                    content={this.props.notice.DEPO}
                   />
                   <Field
                     title="Date de dépôt / changement d’affectation :"
-                    content={this.state.notice.DDPT}
+                    content={this.props.notice.DDPT}
                   />
 
                   <Field
                     title="Ancien dépôt / changement d’affectation :"
-                    content={this.state.notice.ADPT}
+                    content={this.props.notice.ADPT}
                   />
                   <Field
                     title="Localisation :"
-                    content={this.state.notice.LOCA}
+                    content={this.props.notice.LOCA}
                   />
                   <Title
                     content="Informations complémentaires"
-                    notice={this.state.notice}
+                    notice={this.props.notice}
                     fields={["COMM", "EXPO", "BIBL"]}
                   />
                   <Field
                     title="Commentaires :"
-                    content={this.state.notice.COMM}
+                    content={this.props.notice.COMM}
                   />
                   <Field
                     title="Exposition :"
-                    content={this.state.notice.EXPO}
+                    content={this.props.notice.EXPO}
                   />
                   <Field
                     title="Bibliographie :"
-                    content={this.state.notice.BIBL}
+                    content={this.props.notice.BIBL}
                     separator="#"
                   />
                 </div>
@@ -320,33 +299,33 @@ class Notice extends React.Component {
               <h4>A propos de cette notice</h4>
               <hr />
               <div>
-                <Field title="Référence : " content={this.state.notice.REF} />
+                <Field title="Référence : " content={this.props.notice.REF} />
                 <Field
                   title="Date de création : "
-                  content={this.state.notice.DMIS}
+                  content={this.props.notice.DMIS}
                 />
                 <Field
                   title="Dernière mise à jour : "
-                  content={this.state.notice.DMAJ}
+                  content={this.props.notice.DMAJ}
                 />
                 <Field
                   title="Crédits photographiques : "
-                  content={this.state.notice.AUTP}
+                  content={this.props.notice.AUTP}
                 />
                 <Field
                   title="Auteur de l'oeuvre ou de l'original : "
-                  content={this.state.notice.AUTOR}
+                  content={this.props.notice.AUTOR}
                 />
-                <Field title="" content={this.state.notice.COPY} />
+                <Field title="" content={this.props.notice.COPY} />
               </div>
 
               <ContactUs
-                contact={this.state.notice.CONTACT}
-                reference={this.state.notice.REF}
+                contact={this.props.notice.CONTACT}
+                reference={this.props.notice.REF}
               />
             </div>
 
-            <SeeMore notice={this.state.notice} />
+            <SeeMore notice={this.props.notice} />
           </Col>
         </Row>
       </Container>

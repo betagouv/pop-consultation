@@ -1,11 +1,11 @@
 import React from "react";
 import { Row } from "reactstrap";
 import Viewer from "react-viewer";
-import "react-viewer/dist/index.css";
+// import "react-viewer/dist/index.css";
 import ImageGallery from "react-image-gallery";
-import { history } from "../../../redux/store";
-import "./fieldImages.css";
-import "react-image-gallery/styles/css/image-gallery.css";
+// import { history } from "../../../redux/store";
+// import "./fieldImages.css";
+// import "react-image-gallery/styles/css/image-gallery.css";
 
 const noImage = require("../../../assets/noimage.png");
 
@@ -34,7 +34,7 @@ export default class FieldImages extends React.Component {
         obj.thumbnailLabel = (
           <span
             onClick={() => {
-              history.push(e.link);
+              // history.push(e.link);
             }}
             href={e.link}
           >

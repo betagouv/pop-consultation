@@ -1,8 +1,8 @@
 import React from "react";
 import Loader from "../../../components/loader";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { bucket_url } from "../../../config";
-import "./LinkedNotices.css";
+// import "./LinkedNotices.css";
 
 const noImage = require("../../../assets/noimage.png");
 
@@ -40,21 +40,22 @@ class SmallNotice extends React.Component {
     }
 
     return (
-      <Link
-        style={{ textDecoration: "none" }}
-        to={`/notice/${this.props.notice.collection}/${this.props.notice.REF}`}
-        className="card"
-      >
-        <img src={image} alt={this.props.notice.TICO} />
-        <div className="content">
-          <h2>{this.props.notice.TICO}</h2>
-          <p className="categories">{this.props.notice.DENO.join(", ")}</p>
-          <div>
-            <p>{this.props.notice.DOMN}</p>
-            <p>{this.props.notice.AUTR}</p>
-          </div>
-        </div>
-      </Link>
+      <div />
+      // <Link
+      //   style={{ textDecoration: "none" }}
+      //   to={`/notice/${this.props.notice.collection}/${this.props.notice.REF}`}
+      //   className="card"
+      // >
+      //   <img src={image} alt={this.props.notice.TICO} />
+      //   <div className="content">
+      //     <h2>{this.props.notice.TICO}</h2>
+      //     <p className="categories">{this.props.notice.DENO.join(", ")}</p>
+      //     <div>
+      //       <p>{this.props.notice.DOMN}</p>
+      //       <p>{this.props.notice.AUTR}</p>
+      //     </div>
+      //   </div>
+      // </Link>
     );
   }
 }
