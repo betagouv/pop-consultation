@@ -5,10 +5,7 @@ const forceDomain = require("forcedomain");
 const app = express();
 const port = 8081;
 
-console.log("START", new Date());
-
-app.use(express.static(path.join(__dirname, "/../../build")));
-app.use(express.static(path.join(__dirname, "/../../sitemap")));
+app.use(express.static(path.resolve( "build")));
 
 app.use(
   forceDomain({
@@ -24,6 +21,8 @@ app.get("/sitemap/*", (req, res) => {
   res.redirect(301, `https://s3.eu-west-3.amazonaws.com/pop-sitemap/${url}`);
 });
 
+app.get("/notice/*", require("./ssr.js"));
+
 app.route("*").all((req, res) => {
   let status = 404;
   if (
@@ -33,7 +32,10 @@ app.route("*").all((req, res) => {
   ) {
     status = 200;
   }
-  res.status(status).sendFile(path.join(__dirname, "/../../build/index.html"));
+
+  res
+    .status(status)
+    .sendFile(path.resolve( "build/index.html"));
 });
 
 app.listen(port, () => {
