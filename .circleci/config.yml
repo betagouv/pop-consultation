@@ -85,7 +85,7 @@ jobs:
           at: ~/repo
       - restore_node_modules
       - configure_aws_ebcli
-      - run: eb deploy pop-consultation-prod
+      - run: eb deploy pop-consultation
 
 workflows:
   version: 2.1
