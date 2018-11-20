@@ -10,7 +10,7 @@ import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
 import { findCollection } from "./utils";
 
-import "./index.css";
+import s from "./index.css";
 
 class Notice extends React.Component {
   state = {

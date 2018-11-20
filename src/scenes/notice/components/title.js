@@ -1,14 +1,13 @@
 import React from "react";
-// import "./title.css";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./title.css";
 
-
-export default class Title extends React.Component {
+class Title extends React.Component {
   render() {
-    const hasVisibleFields = !!this.props.fields.filter(
-      f =>
-        Array.isArray(this.props.notice[f])
-          ? this.props.notice[f].length
-          : this.props.notice[f]
+    const hasVisibleFields = !!this.props.fields.filter(f =>
+      Array.isArray(this.props.notice[f])
+        ? this.props.notice[f].length
+        : this.props.notice[f]
     ).length;
     if (hasVisibleFields) {
       return <h2>{this.props.content}</h2>;
@@ -16,3 +15,5 @@ export default class Title extends React.Component {
     return <div />;
   }
 }
+
+export default withStyles(s)(Title);

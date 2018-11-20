@@ -1,34 +1,21 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
 import LinkedNotices from "./components/LinkedNotices";
 import Field from "./components/field";
-import Loader from "../../components/loader";
 import Title from "./components/title";
-import API from "../../services/api";
-import NotFound from "../../components/NotFound";
 import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
-// import "./index.css";
+import s from "./index.css";
 
 class Notice extends React.Component {
   state = {
-    notice: null,
     error: "",
     loading: true,
     links: []
   };
 
-  async componentWillMount() {
-    console.log("hey", this.props);
-
-  }
-
   render() {
-
-    if (!this.props.notice) {
-      return <NotFound />;
-    }
-
     return (
       <Container className="notice" fluid>
         <Row className="top-section">
@@ -384,6 +371,4 @@ const SeeMore = ({ notice }) => {
   );
 };
 
-//http://www2.culture.gouv.fr/public/mistral/museo_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=M5027
-
-export default Notice;
+export default withStyles(s)(Notice);

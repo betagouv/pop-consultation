@@ -9,7 +9,7 @@ import Header from "./components/header";
 import API from "../../services/api";
 import { findCollection } from "./utils";
 import ContactUs from "./components/ContactUs";
-import "./index.css";
+import s from "./index.css";
 
 class Notice extends React.Component {
   state = {

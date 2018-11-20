@@ -1,5 +1,6 @@
 import * as React from "react";
-// import "./field.css";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import s from "./field.css";
 
 const Field = ({ content, title, separator, join = ", " }) => {
   if (!content || (Array.isArray(content) && content.length === 0)) {
@@ -25,4 +26,4 @@ function replaceAll(str, find, replace) {
   return str.replace(new RegExp(find, "g"), replace);
 }
 
-export default Field;
+export default withStyles(s)(Field);

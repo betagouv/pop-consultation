@@ -15,6 +15,15 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.css$/,
+        use: [
+          "isomorphic-style-loader",
+          {
+            loader: "css-loader"
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         use: "babel-loader"
       },
