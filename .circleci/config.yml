@@ -100,14 +100,14 @@ workflows:
             - prepare
           filters:
             branches:
-              only: master # change this if you want to test a branch
+              only: master
       - deploy_eb_staging:
           requires:
             - test
             - build_staging
           filters:
             branches:
-              only: master # change this if you want to test a branch
+              only: master
       - build_prod:
           requires:
             - deploy_eb_staging
