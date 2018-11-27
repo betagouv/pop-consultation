@@ -21,10 +21,32 @@ import { store, history } from "./../src/redux/store";
 import PublicRoutes from "./../src/router";
 
 async function exec(req, res) {
-  const { ref, collection } = req.params;
+  //const { ref, collection } = req.params;
+  // const { body, css } = await getPage(collection, ref, req);
+  const css = new Set(); // CSS for all rendered React components
+  const injectCssContext = {
+    insertCss: (...styles) => {
+      return styles.forEach(style => {
+          if(style) {
+            //console.log(style._getCss())
+            css.add(style._getCss());
+          }
+      })
+    }
+  };
+  const staticRouterContext = { };
+  const body = ReactDOMServer.renderToString(
+    <Provider store={store}>
+        <StaticRouter context={staticRouterContext} location={ req.url }>
+          <ContextProvider context={injectCssContext}>
+            <PublicRoutes history={history} />
+          </ContextProvider>
+        </StaticRouter>
+    </Provider>
+  );
+  const cssString = [...css].join("");
 
-  const { body, css } = await getPage(collection, ref, req);
-  const indexFile = path.resolve("build/index.html");
+  const indexFile = path.resolve("build/index-template.html");
 
   fs.readFile(indexFile, "utf8", (err, data) => {
     if (err) {
@@ -34,7 +56,7 @@ async function exec(req, res) {
     return res.send(
       data
         .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
-        .replace("</head>", ` <style type="text/css">${css}</style></head>`) //TODO pas ouf le replace </head>
+        .replace("</head>", ` <style type="text/css">${cssString}</style></head>`) //TODO pas ouf le replace </head>
     );
     //TODO Peut etre qu'on peut tout remplacer d'un coup
   });
@@ -44,8 +66,14 @@ function getPage(collection, ref, req) {
   return new Promise(async (resolve, reject) => {
     const css = new Set(); // CSS for all rendered React components
     const injectCssContext = {
-      insertCss: (...styles) =>
-        styles.forEach(style => css.add(style._getCss()))
+      insertCss: (...styles) => {
+        return styles.forEach(style => {
+            if(style) {
+              //console.log(style._getCss())
+              css.add(style._getCss());
+            }
+        })
+      }
     };
     const staticRouterContext = { };
 

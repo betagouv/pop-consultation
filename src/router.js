@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { ConnectedRouter } from "react-router-redux";
+//import { ConnectedRouter } from "react-router-redux";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -41,7 +41,7 @@ class PublicRoutes extends React.Component {
             <Switch>
               <Route exact path={"/"} component={Home} />
               <Route path={"/search"} component={Search} />
-              <Route path={"/opendata"} component={Opendata} />
+              <Route exact path={"/opendata"} component={Opendata} />
               <Route path={"/notice/:ref"} component={Notice} />
               <Route component={NotFound} />
             </Switch>

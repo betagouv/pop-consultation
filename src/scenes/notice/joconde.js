@@ -11,6 +11,11 @@ import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
 import styles from "./index.css";
 
+import stylesMap from "./components/map.css";
+import stylesFieldImages from "./components/fieldImages.css";
+import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
+import stylesGallery from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
+
 class Joconde extends React.Component {
   state = {
     notice: null,
@@ -409,4 +414,4 @@ const SeeMore = ({ notice }) => {
 
 //http://www2.culture.gouv.fr/public/mistral/museo_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=M5027
 
-export default withStyles(styles)(Joconde);
+export default withStyles(styles, stylesMap, stylesViewer, stylesFieldImages, stylesGallery)(Joconde);

@@ -1,6 +1,6 @@
 import React from "react";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
-import styles from "./map.css";
+import stylesMap from "./map.css";
 
 class MapComponent extends React.Component {
   state = {
@@ -108,4 +108,4 @@ class MapComponent extends React.Component {
   }
 }
 
-export default withStyles(styles)(MapComponent);
+export default withStyles(stylesMap)(MapComponent);

@@ -19,7 +19,8 @@ app.use(
 // app.use(express.static(path.join(__dirname, "/../../sitemap")));
 app.use(express.static(path.resolve("build")));
 
-app.get("/notice/:collection/:ref", require("./ssr.js"));
+// app.get("/notice/:collection/:ref", require("./ssr.js"));
+app.get("/*", require("./ssr.js"));
 
 // Sitemap redirection
 app.get("/sitemap/*", (req, res) => {

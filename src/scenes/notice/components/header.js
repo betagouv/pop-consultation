@@ -1,10 +1,13 @@
 import React from "react";
 import { Row, Col } from "reactstrap";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
 import FieldImages from "./fieldImages";
 import Map from "./map";
 import { toFieldImages, hasCoordinates } from "../utils";
 
-export default class Header extends React.Component {
+import stylesHeader from "./header.css";
+
+class Header extends React.Component {
   render() {
     const images = toFieldImages(this.props.images);
     const showMap = hasCoordinates(this.props.notice.POP_COORDONNEES);
@@ -35,3 +38,5 @@ export default class Header extends React.Component {
     return <Row>{cols}</Row>;
   }
 }
+
+export default withStyles(stylesHeader)(Header);

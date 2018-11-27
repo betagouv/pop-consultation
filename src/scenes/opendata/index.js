@@ -1,9 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import stylesOpenData from './index.css';
 
-import "./index.css";
-
-export default () => (
+const OpenData = () => (
   <div className="opendata-view">
     <div>
       La plateforme POP vise à rendre accessible au public l’ensemble des
@@ -112,3 +111,5 @@ export default () => (
     <div />
   </div>
 );
+
+export default withStyles(stylesOpenData)(OpenData);

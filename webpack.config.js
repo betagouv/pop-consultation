@@ -20,7 +20,7 @@ module.exports = env => {
     ),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
-      filename: "index.html",
+      filename: "index-template.html",
       inject: "body",
       favicon: path.join("public/favicon.ico"),
       minify: {

@@ -54,9 +54,9 @@ const injectCssContext = {
 
 ReactDOM.hydrate(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter history={history}>
       <ContextProvider context={injectCssContext}>
-        <PublicRoutes history={history} />
+        <PublicRoutes />
       </ContextProvider>
     </BrowserRouter>
   </Provider>,
