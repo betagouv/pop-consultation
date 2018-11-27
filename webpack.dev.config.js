@@ -47,7 +47,25 @@ module.exports = env => {
       rules: [
         {
           test: /\.css$/,
-          loader: "style-loader!css-loader"
+          use: [
+            'isomorphic-style-loader',
+            {
+              loader: 'css-loader',
+              options: {
+                importLoaders: 1
+              }
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                ident: 'postcss',
+                plugins: () => [
+                  require('postcss-flexbugs-fixes'),
+                  require('autoprefixer')
+                ]
+              }
+            },
+          ]
         },
         {
           test: /\.js$/,

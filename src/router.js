@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { ConnectedRouter } from "react-router-redux";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+
 import ErrorBoundary from "./components/ErrorBoundary";
 import Header from "./scenes/header";
 import Footer from "./scenes/footer";
@@ -11,25 +13,27 @@ import Search from "./scenes/search";
 import Opendata from "./scenes/opendata";
 import Notice from "./scenes/notice";
 
-import PiwikReactRouter from "piwik-react-router";
+// import PiwikReactRouter from "piwik-react-router";
 
 import ScrollToTop from "./components/ScrollToTop";
 
-const piwik = PiwikReactRouter({
-  url: "https://stats.data.gouv.fr",
-  siteId: 63
-});
-piwik.push([
-  "setDomains",
-  ["*.pop.beta.gouv", "*.pop.culture.gouv.fr", "*.production.pop.beta.gouv.fr"]
-]);
+import styles from './index.css';
 
-export default class PublicRoutes extends React.Component {
+// const piwik = PiwikReactRouter({
+//   url: "https://stats.data.gouv.fr",
+//   siteId: 63
+// });
+// piwik.push([
+//   "setDomains",
+//   ["*.pop.beta.gouv", "*.pop.culture.gouv.fr", "*.production.pop.beta.gouv.fr"]
+// ]);
+
+class PublicRoutes extends React.Component {
   componentWillReceiveProps(newProps) {}
 
   render() {
     return (
-      <ConnectedRouter history={piwik.connectToHistory(this.props.history)}>
+      // <ConnectedRouter history={piwik.connectToHistory(this.props.history)}>
         <div className="main">
           <ScrollToTop />
           <Header />
@@ -44,7 +48,9 @@ export default class PublicRoutes extends React.Component {
           </ErrorBoundary>
           <Footer />
         </div>
-      </ConnectedRouter>
+      // </ConnectedRouter>
     );
   }
 }
+
+export default withStyles(styles)(PublicRoutes);

@@ -1,8 +1,9 @@
 import React from "react";
 import Slider from "react-slick";
 import { Tooltip, Button, Input } from "reactstrap";
-import "./index.css";
-import "./slider.css";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import styles from './index.css';
+import stylesSlider from  "./slider.css";
 import { history } from "../../redux/store";
 
 const bases = [
@@ -83,7 +84,7 @@ const bases = [
   }
 ];
 
-export default class Home extends React.Component {
+class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -264,3 +265,5 @@ export default class Home extends React.Component {
     );
   }
 }
+
+export default withStyles(styles, stylesSlider)(Home);

@@ -7,9 +7,10 @@ import Mnr from './mnr';
 import Memoire from './memoire';
 import NotFound from "../../components/NotFound";
 
-import './index.css';
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import styles from './index.css';
 
-export default () => (
+const Notice = () => (
     <div>
         <Switch>
             <Route path={`/notice/merimee/:ref`} component={Merimee} />
@@ -21,3 +22,5 @@ export default () => (
         </Switch>
     </div>
 );
+
+export default withStyles(styles)(Notice);

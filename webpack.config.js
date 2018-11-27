@@ -69,7 +69,7 @@ module.exports = env => {
       // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
       navigateFallbackWhitelist: [/^(?!\/__).*/],
       // Don't precache sourcemaps (they're large) and build asset manifest:
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/] //, /index\.html$/
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/, /index\.html$/]
     })
   ];
 

@@ -4,6 +4,7 @@ import fs from "fs";
 import React from "react";
 import express from "express";
 import ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
 
 // import ContextProvider from "./ContextProvider.js";
 
@@ -15,11 +16,15 @@ import Merimee from "./../src/scenes/notice/merimee";
 import Memoire from "./../src/scenes/notice/memoire";
 import NotFound from "./../src/components/NotFound";
 
+import { Provider } from "react-redux";
+import { store, history } from "./../src/redux/store";
+import PublicRoutes from "./../src/router";
+
 async function exec(req, res) {
   const { ref, collection } = req.params;
 
-  const { body, css } = await getPage(collection, ref);
-  const indexFile = path.resolve("public/index.html");
+  const { body, css } = await getPage(collection, ref, req);
+  const indexFile = path.resolve("build/index.html");
 
   fs.readFile(indexFile, "utf8", (err, data) => {
     if (err) {
@@ -35,17 +40,18 @@ async function exec(req, res) {
   });
 }
 
-function getPage(collection, ref) {
+function getPage(collection, ref, req) {
   return new Promise(async (resolve, reject) => {
     const css = new Set(); // CSS for all rendered React components
-    const context = {
+    const injectCssContext = {
       insertCss: (...styles) =>
         styles.forEach(style => css.add(style._getCss()))
     };
+    const staticRouterContext = { };
 
     const notice = await API.getNotice(collection, ref);
 
-    let app;
+    /*let app;
 
     if (!notice) {
       console.log("NOTICE NOT FOUND");
@@ -66,10 +72,16 @@ function getPage(collection, ref) {
         console.log("collection not found ", collection);
         app = <NotFound />;
       }
-    }
+    }*/
 
     const body = ReactDOMServer.renderToString(
-      <ContextProvider context={context}>{app}</ContextProvider>
+      <Provider store={store}>
+          <StaticRouter context={staticRouterContext} location={ req.url }>
+            <ContextProvider context={injectCssContext}>
+              <PublicRoutes history={history} />
+            </ContextProvider>
+          </StaticRouter>
+      </Provider>
     );
 
     resolve({ body, css: [...css].join("") });
@@ -86,8 +98,7 @@ class ContextProvider extends React.Component {
   }
 
   render() {
-    return React.cloneElement(this.props.children, { ...this.props }); //TODO ici j'ai peut etre ralenti le schmilblick  en fait un clone
-    // return <NotFound {...this.props} />;
+    return React.cloneElement(this.props.children, { ...this.props });
   }
 }
 
