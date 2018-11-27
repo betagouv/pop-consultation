@@ -1,8 +1,9 @@
 import React from "react";
-import "./title.css";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import styles from "./title.css";
 
 
-export default class Title extends React.Component {
+class Title extends React.Component {
   render() {
     const hasVisibleFields = !!this.props.fields.filter(
       f =>
@@ -16,3 +17,5 @@ export default class Title extends React.Component {
     return <div />;
   }
 }
+
+export default withStyles(styles)(Title);

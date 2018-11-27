@@ -1,8 +1,8 @@
 import React from "react";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
+import styles from "./map.css";
 
-import "./map.css";
-
-export default class MapComponent extends React.Component {
+class MapComponent extends React.Component {
   state = {
     center: null
   };
@@ -112,3 +112,5 @@ export default class MapComponent extends React.Component {
     );
   }
 }
+
+export default withStyles(styles)(MapComponent);

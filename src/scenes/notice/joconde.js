@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
 import LinkedNotices from "./components/LinkedNotices";
 import Field from "./components/field";
 import Loader from "../../components/loader";
@@ -8,7 +9,7 @@ import API from "../../services/api";
 import NotFound from "../../components/NotFound";
 import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
-import "./index.css";
+import styles from "./index.css";
 
 class Notice extends React.Component {
   state = {
@@ -407,4 +408,4 @@ const SeeMore = ({ notice }) => {
 
 //http://www2.culture.gouv.fr/public/mistral/museo_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=M5027
 
-export default Notice;
+export default withStyles(styles)(Notice);
