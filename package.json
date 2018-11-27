@@ -50,8 +50,10 @@
     "webpack-node-externals": "^1.7.2"
   },
   "scripts": {
-    "start": "node src/server/index.js",
-    "dev": "webpack-dev-server --config webpack.dev.config.js --open",
+    "start": "node ./build/index.js",
+    "dev:build-server": "webpack --env.NODE_ENV=development --config webpack.server.js --mode=development -w",
+    "dev:start": "nodemon ./build/index.js",
+    "dev": "npm-run-all --parallel dev:*",
     "build:prod": "webpack --env.production --env.NODE_ENV=production",
     "build:staging": "webpack --env.staging --env.NODE_ENV=staging",
     "deploy:prod": "yarn && yarn build:prod && eb deploy pop-consultation --profil POP",
