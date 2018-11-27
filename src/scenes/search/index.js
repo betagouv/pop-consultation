@@ -1,7 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
-import { connect } from "react-redux";
-import { push } from "react-router-redux";
+import { history } from "../../redux/store";
 import {
   Row,
   Col,
@@ -130,9 +129,11 @@ class Search extends React.Component {
   }
 
   toggle(subRoute) {
-    const { onTabClicked, location } = this.props;
+    const { location } = this.props;
     if (this.state.activeTab !== subRoute) {
-      onTabClicked(subRoute, location.search);
+      history.push(
+        `/search/${subRoute}${location.search}`
+      );
     }
   }
 
@@ -447,15 +448,4 @@ class Search extends React.Component {
   }
 }
 
-const mapStateToProps = state => ({});
-
-const mapDispatchToProps = dispatch => ({
-  onTabClicked: (subPath, params) => {
-    dispatch(push(`/search/${subPath}${params}`));
-  }
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Search);
+export default Search;
