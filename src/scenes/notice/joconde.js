@@ -281,6 +281,7 @@ class Joconde extends React.Component {
                   <Field
                     title="Ancienne appartenance :"
                     content={this.state.notice.APTN}
+                    separator="#"
                   />
                   <Field
                     title="Dépôt / établissement dépositaire :"
@@ -307,6 +308,7 @@ class Joconde extends React.Component {
                   <Field
                     title="Commentaires :"
                     content={this.state.notice.COMM}
+                    separator="#"
                   />
                   <Field
                     title="Exposition :"
