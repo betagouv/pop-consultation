@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { image } from "../../image";
 
-import './CardList.css';
-
 import mdf from '../../../../assets/musee-de-france.jpg';
 
 const joinData = f => {

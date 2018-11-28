@@ -20,7 +20,6 @@ import {
 } from "@appbaseio/reactivesearch";
 import classnames from "classnames";
 import { MultiList } from "pop-shared";
-import multiListStyles from "!!isomorphic-style-loader!css-loader!pop-shared/dist/MultiList.css";
 
 import List from "./subComponents/List";
 import Map from "./subComponents/Map";
@@ -29,9 +28,6 @@ import Mosaique from "./subComponents/Mosaique";
 import { es_url } from "../../config.js";
 
 import filterImg from "../../assets/filter.png";
-
-import withStyles from "isomorphic-style-loader/lib/withStyles";
-import styles from './index.css';
 
 const DEFAULT_FILTER = [
   "mainSearch",
@@ -460,4 +456,4 @@ class Search extends React.Component {
   }
 }
 
-export default withStyles(styles, multiListStyles)(Search);
+export default Search;
