@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
 import Header from "./components/header";
 import Field from "./components/field";
 import LinkedNotices from "./components/LinkedNotices";
@@ -11,11 +10,6 @@ import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
 import { findCollection } from "./utils";
 
-import styles from "./index.css";
-import stylesMap from "./components/map.css";
-import stylesFieldImages from "./components/fieldImages.css";
-import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
-import stylesGallery from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
 
 class Memoire extends React.Component {
   state = {
@@ -547,4 +541,4 @@ const SeeMore = ({ notice }) => {
   );
 };
 
-export default withStyles(styles, stylesMap, stylesViewer, stylesFieldImages, stylesGallery)(Memoire);
+export default Memoire;

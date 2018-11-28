@@ -1,6 +1,5 @@
 import React from "react";
 import { ReactiveComponent } from "@appbaseio/reactivesearch";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
 import nGeoHash from "ngeohash";
 import queryString from "query-string";
 import Loader from "../../../../components/loader";
@@ -9,12 +8,6 @@ import CardMap from "./CardMap";
 
 import LinkedNotices from './subComponents/LinkedNotices';
 import SingleNotice from './subComponents/SingleNotice';
-
-// import "./mapbox-gl.css";
-import styles from "./map.css";
-import stylesCard from "./CardMap.css";
-import stylesLinkedNotices from "./subComponents/LinkedNotices/LinkedNotices.css";
-import stylesSingleNotice from "./subComponents/SingleNotice/singleNotice.css";
 
 import SateliteImg from '../../../../assets/Satelite.png';
 import StreetImg from '../../../../assets/street.png';
@@ -61,7 +54,7 @@ const uniqueId = (prefix='$lodash$') => {
   return `${prefix + id}`
 }
 
-class Umbrella extends React.Component {
+export default class Umbrella extends React.Component {
   state = {
     query: {},
     isNewSearch: false
@@ -201,8 +194,6 @@ Area width x height
     );
   }
 }
-
-export default withStyles(styles, stylesCard, stylesLinkedNotices, stylesSingleNotice)(Umbrella);
 
 class Map extends React.Component {
   state = {

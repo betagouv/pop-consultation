@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
 import Field from "./components/field";
 import NotFound from "../../components/NotFound";
 import LinkedNotices from "./components/LinkedNotices";
@@ -10,12 +9,6 @@ import Header from "./components/header";
 import API from "../../services/api";
 import { findCollection } from "./utils";
 import ContactUs from "./components/ContactUs";
-
-import styles from "./index.css";
-import stylesMap from "./components/map.css";
-import stylesFieldImages from "./components/fieldImages.css";
-import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
-import stylesGallery from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
 
 class Palissy extends React.Component {
   state = {
@@ -555,4 +548,4 @@ const SeeMore = ({ notice }) => {
   );
 };
 
-export default withStyles(styles, stylesMap, stylesViewer, stylesFieldImages, stylesGallery)(Palissy);
+export default Palissy;
