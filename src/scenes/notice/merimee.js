@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
 import Field from "./components/field";
 import LinkedNotices from "./components/LinkedNotices";
 import Header from "./components/header";
@@ -9,9 +10,14 @@ import API from "../../services/api";
 import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
 import { postFixedLink } from "./utils";
-import "./index.css";
 
-class Notice extends React.Component {
+import styles from "./index.css";
+import stylesMap from "./components/map.css";
+import stylesFieldImages from "./components/fieldImages.css";
+import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
+import stylesGallery from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
+
+class Merimee extends React.Component {
   state = {
     notice: null,
     error: "",
@@ -19,7 +25,7 @@ class Notice extends React.Component {
     loading: true
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.load(this.props.match.params.ref);
   }
 
@@ -602,4 +608,4 @@ const SeeMore = ({ notice }) => {
   );
 };
 
-export default Notice;
+export default withStyles(styles, stylesMap, stylesViewer, stylesFieldImages, stylesGallery)(Merimee);

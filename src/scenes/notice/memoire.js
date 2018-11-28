@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
 import Header from "./components/header";
 import Field from "./components/field";
 import LinkedNotices from "./components/LinkedNotices";
@@ -10,9 +11,13 @@ import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
 import { findCollection } from "./utils";
 
-import "./index.css";
+import styles from "./index.css";
+import stylesMap from "./components/map.css";
+import stylesFieldImages from "./components/fieldImages.css";
+import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
+import stylesGallery from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
 
-class Notice extends React.Component {
+class Memoire extends React.Component {
   state = {
     notice: null,
     error: "",
@@ -20,7 +25,7 @@ class Notice extends React.Component {
     loading: true
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.load(this.props.match.params.ref);
   }
 
@@ -542,4 +547,4 @@ const SeeMore = ({ notice }) => {
   );
 };
 
-export default Notice;
+export default withStyles(styles, stylesMap, stylesViewer, stylesFieldImages, stylesGallery)(Memoire);

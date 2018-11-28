@@ -5,7 +5,6 @@ import React from "react";
 import express from "express";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
-import { ConnectedRouter } from 'connected-react-router'
 
 import { Provider } from "react-redux";
 import createStore from "./../src/redux/store";

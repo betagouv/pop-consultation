@@ -9,8 +9,8 @@ import API from "../../services/api";
 import NotFound from "../../components/NotFound";
 import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
-import styles from "./index.css";
 
+import styles from "./index.css";
 import stylesMap from "./components/map.css";
 import stylesFieldImages from "./components/fieldImages.css";
 import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
