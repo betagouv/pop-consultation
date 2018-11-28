@@ -24,7 +24,7 @@ const bases = {
 
 const capitalizeFirstLetter = s => s.charAt(0).toUpperCase() + s.slice(1);
 
-const CardList = ({ data }) => {
+export default ({ data }) => {
   let content = {};
   const index = data._index.replace(/[0-9]+/, "");
   switch (index) {
