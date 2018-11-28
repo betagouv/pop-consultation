@@ -17,7 +17,28 @@ import PiwikReactRouter from "piwik-react-router";
 
 import ScrollToTop from "./components/ScrollToTop";
 
-import styles from './index.css';
+import routerStyles from './index.css';
+import viewerStyles from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
+import galleryStyles from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
+import multiListStyles from "!!isomorphic-style-loader!css-loader!pop-shared/dist/MultiList.css";
+import notFoundStyles from './components/NotFound/index.css';
+import loaderStyles from './components/loader/index.css';
+import homeStyles from './scenes/home/index.css';
+import searchStyles from './scenes/search/index.css';
+import listCardStyles from "./scenes/search/subComponents/List/CardList.css";
+import mapStyles from "./scenes/search/subComponents/Map/map.css";
+import cardMapStyles from "./scenes/search/subComponents/Map/CardMap.css";
+import mapLinkedNoticesStyles from "./scenes/search/subComponents/Map/subComponents/LinkedNotices/LinkedNotices.css";
+import mapSingleNoticeStyles from "./scenes/search/subComponents/Map/subComponents/SingleNotice/singleNotice.css";
+import mosaiqueCardStyles from "./scenes/search/subComponents/Mosaique/CardMosaique.css";
+import noticeStyles from './scenes/notice/index.css';
+import titleNoticeStyles from "./scenes/notice/components/title.css";
+import fieldNoticeStyles from "./scenes/notice/components/field.css";
+import headerNoticeStyles from "./scenes/notice/components/header.css";
+import fieldImagesStyles from "./scenes/notice/components/fieldImages.css";
+import noticeMapStyles from "./scenes/notice/components/map.css";
+import linkedNoticesStyles from "./scenes/notice/components/LinkedNotices.css";
+import openDataStyles from './scenes/opendata/index.css';
 
  const piwik = PiwikReactRouter({
   url: "https://stats.data.gouv.fr",
@@ -53,4 +74,27 @@ class PublicRoutes extends React.Component {
   }
 }
 
-export default withStyles(styles)(PublicRoutes);
+export default withStyles(
+  routerStyles,
+  viewerStyles,
+  galleryStyles,
+  multiListStyles,
+  notFoundStyles,
+  loaderStyles,
+  homeStyles,
+  searchStyles,
+  listCardStyles, 
+  mapStyles, 
+  cardMapStyles, 
+  mapLinkedNoticesStyles, 
+  mapSingleNoticeStyles, 
+  mosaiqueCardStyles,
+  noticeStyles,
+  titleNoticeStyles,
+  fieldNoticeStyles,
+  headerNoticeStyles,
+  fieldImagesStyles,
+  noticeMapStyles,
+  linkedNoticesStyles,
+  openDataStyles,
+)(PublicRoutes);

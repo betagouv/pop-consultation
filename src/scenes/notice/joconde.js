@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
 import LinkedNotices from "./components/LinkedNotices";
 import Field from "./components/field";
 import Loader from "../../components/loader";
@@ -9,12 +8,6 @@ import API from "../../services/api";
 import NotFound from "../../components/NotFound";
 import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
-
-import styles from "./index.css";
-import stylesMap from "./components/map.css";
-import stylesFieldImages from "./components/fieldImages.css";
-import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
-import stylesGallery from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
 
 class Joconde extends React.Component {
   state = {
@@ -416,4 +409,4 @@ const SeeMore = ({ notice }) => {
 
 //http://www2.culture.gouv.fr/public/mistral/museo_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=M5027
 
-export default withStyles(styles, stylesMap, stylesViewer, stylesFieldImages, stylesGallery)(Joconde);
+export default Joconde;

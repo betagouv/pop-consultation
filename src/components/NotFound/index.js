@@ -1,7 +1,5 @@
 import React from 'react';
 import { Container } from 'reactstrap';
-import withStyles from "isomorphic-style-loader/lib/withStyles";
-import styles from './index.css';
 import courbet from '../../assets/courbet.jpeg';
 
 const NotFound = () => (
@@ -22,4 +20,4 @@ const NotFound = () => (
     </Container>
 );
 
-export default withStyles(styles)(NotFound);
+export default NotFound;

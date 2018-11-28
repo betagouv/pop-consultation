@@ -1,7 +1,4 @@
 import React from "react";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
-import styles from "./title.css";
-
 
 class Title extends React.Component {
   render() {
@@ -18,4 +15,4 @@ class Title extends React.Component {
   }
 }
 
-export default withStyles(styles)(Title);
+export default Title;

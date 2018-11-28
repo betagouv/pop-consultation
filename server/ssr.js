@@ -47,7 +47,7 @@ async function exec(req, res) {
         .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
         .replace("</head>", ` <style type="text/css">${cssString}</style></head>`) //TODO pas ouf le replace </head>
     );
-    //TODO Peut etre qu'on peut tout remplacer d'un coup
+
   });
 }
 

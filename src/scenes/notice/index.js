@@ -7,9 +7,6 @@ import Mnr from './mnr';
 import Memoire from './memoire';
 import NotFound from "../../components/NotFound";
 
-import withStyles from "isomorphic-style-loader/lib/withStyles";
-import styles from './index.css';
-
 const Notice = () => (
     <div>
         <Switch>
@@ -23,4 +20,4 @@ const Notice = () => (
     </div>
 );
 
-export default withStyles(styles)(Notice);
+export default Notice;

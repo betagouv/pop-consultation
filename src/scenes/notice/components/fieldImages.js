@@ -2,11 +2,7 @@ import React from "react";
 import { Row } from "reactstrap";
 import Viewer from "react-viewer";
 import ImageGallery from "react-image-gallery";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
 import { history } from "../../../redux/store";
-import stylesViewer from  "!!isomorphic-style-loader!css-loader!react-viewer/dist/index.css";
-import styles from "./fieldImages.css";
-import stylesGallery from '!!isomorphic-style-loader!css-loader!react-image-gallery/styles/css/image-gallery.css';
 
 const noImage = require("../../../assets/noimage.png");
 
@@ -94,4 +90,4 @@ class FieldImages extends React.Component {
 }
 
 
-export default withStyles(stylesViewer, styles, stylesGallery)(FieldImages);
+export default FieldImages;

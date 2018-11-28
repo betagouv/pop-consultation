@@ -15,11 +15,8 @@ app.use(
   })
 );
 
-// app.use(express.static(path.join(__dirname, "/../../build")));
-// app.use(express.static(path.join(__dirname, "/../../sitemap")));
 app.use(express.static(path.resolve("build")));
 
-// app.get("/notice/:collection/:ref", require("./ssr.js"));
 app.get("/*", require("./ssr.js"));
 
 // Sitemap redirection
@@ -37,7 +34,7 @@ app.route("*").all((req, res) => {
   ) {
     status = 200;
   }
-  //res.status(status).sendFile(path.join(__dirname, "/../../build/index.html"));
+
   res.status(status).sendFile(path.resolve("build/index.html"));
 });
 

@@ -1,9 +1,7 @@
 import React from "react";
-import withStyles from "isomorphic-style-loader/lib/withStyles";
 import Loader from "../../../components/loader";
 import { Link } from "react-router-dom";
 import { bucket_url } from "../../../config";
-import styles from "./LinkedNotices.css";
 
 const noImage = require("../../../assets/noimage.png");
 
@@ -60,4 +58,4 @@ class SmallNotice extends React.Component {
   }
 }
 
-export default withStyles(styles)(LinkedNotice);
+export default LinkedNotice;
