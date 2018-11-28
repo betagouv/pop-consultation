@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { image } from "../../image";
-import "./CardList.css";
+
+import './CardList.css';
+
 import mdf from '../../../../assets/musee-de-france.jpg';
 
 const joinData = f => {
@@ -23,7 +25,7 @@ const bases = {
 
 const capitalizeFirstLetter = s => s.charAt(0).toUpperCase() + s.slice(1);
 
-export default ({ data }) => {
+const CardList = ({ data }) => {
   let content = {};
   const index = data._index.replace(/[0-9]+/, "");
   switch (index) {
@@ -97,6 +99,8 @@ export default ({ data }) => {
     </Link>
   );
 };
+
+export default CardList;
 
 const Mnr = ({ data, index }) => {
   const REF = data.REF;

@@ -3,7 +3,7 @@ import Slider from "react-slick";
 import { Tooltip, Button, Input } from "reactstrap";
 import withStyles from "isomorphic-style-loader/lib/withStyles";
 import stylesHome from './index.css';
-import { history } from "../../redux/store";
+//import { history } from "../../redux/store";
 
 const bases = [
   {
@@ -94,6 +94,7 @@ class Home extends React.Component {
   }
 
   gotoSearch() {
+    const { history } = this.props;
     const searchValue = document.getElementById("main-search").value;
     const base = this.state.selected.length === 5  ? "" : `base=${JSON.stringify(this.state.selected.join(', ').replace('Récupération artistique', 'Oeuvres spoliées'))}&`
     history.push(

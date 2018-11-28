@@ -6,8 +6,10 @@ import WebFont from "webfontloader";
 import { BrowserRouter } from "react-router-dom";
 
 import registerServiceWorker from "./registerServiceWorker";
-import { store, history } from "./redux/store";
+import createStore from "./redux/store";
 import PublicRoutes from "./router";
+
+const { store, history } = createStore();
 
 dotenv.load();
 
@@ -54,11 +56,9 @@ const injectCssContext = {
 
 ReactDOM.hydrate(
   <Provider store={store}>
-    <BrowserRouter history={history}>
-      <ContextProvider context={injectCssContext}>
-        <PublicRoutes />
-      </ContextProvider>
-    </BrowserRouter>
+        <ContextProvider context={injectCssContext}>
+          <PublicRoutes history={history} />
+        </ContextProvider>
   </Provider>,
   document.getElementById("root")
 );

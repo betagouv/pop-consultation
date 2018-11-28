@@ -1,9 +1,12 @@
 import React from "react";
 import { ReactiveList } from "@appbaseio/reactivesearch";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
 
 import CardList from "./CardList";
 
-export default ({ filter }) => (
+import styles from './CardList.css';
+
+const List = ({ filter }) => (
     <ReactiveList
         componentId="results"
         react={{
@@ -27,3 +30,6 @@ export default ({ filter }) => (
         // pagination={true}
     />
 );
+
+
+export default withStyles(styles)(List);

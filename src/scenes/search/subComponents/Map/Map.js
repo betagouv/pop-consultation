@@ -1,5 +1,6 @@
 import React from "react";
 import { ReactiveComponent } from "@appbaseio/reactivesearch";
+import withStyles from "isomorphic-style-loader/lib/withStyles";
 import nGeoHash from "ngeohash";
 import queryString from "query-string";
 import Loader from "../../../../components/loader";
@@ -9,8 +10,11 @@ import CardMap from "./CardMap";
 import LinkedNotices from './subComponents/LinkedNotices';
 import SingleNotice from './subComponents/SingleNotice';
 
-import "./mapbox-gl.css";
-import "./map.css";
+// import "./mapbox-gl.css";
+import styles from "./map.css";
+import stylesCard from "./CardMap.css";
+import stylesLinkedNotices from "./subComponents/LinkedNotices/LinkedNotices.css";
+import stylesSingleNotice from "./subComponents/SingleNotice/singleNotice.css";
 
 import SateliteImg from '../../../../assets/Satelite.png';
 import StreetImg from '../../../../assets/street.png';
@@ -57,7 +61,7 @@ const uniqueId = (prefix='$lodash$') => {
   return `${prefix + id}`
 }
 
-export default class Umbrella extends React.Component {
+class Umbrella extends React.Component {
   state = {
     query: {},
     isNewSearch: false
@@ -66,6 +70,8 @@ export default class Umbrella extends React.Component {
   prevPrecision = 1;
   prevBounds = null;
   currentSearch = null;
+
+  urlLocation = null;
 
   constructor(props) {
     super(props);
@@ -77,7 +83,18 @@ export default class Umbrella extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const parsed = queryString.parse(location.search);
+    try {
+      if(location) {
+        this.urlLocation = location.search;
+      } 
+    } catch (error) {
+      if(this.props.location) { // If window.location not defined use props
+        this.urlLocation = this.props.location.search;
+      } else {
+        throw new Error("location is not defined");
+      }
+    }
+    const parsed = queryString.parse(this.urlLocation);
     const nextSearch = JSON.stringify(parsed);
     if(this.currentSearch !== nextSearch) { // New Search
       this.currentSearch = nextSearch;
@@ -184,6 +201,8 @@ Area width x height
     );
   }
 }
+
+export default withStyles(styles, stylesCard, stylesLinkedNotices, stylesSingleNotice)(Umbrella);
 
 class Map extends React.Component {
   state = {
