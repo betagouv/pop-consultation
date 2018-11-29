@@ -5,6 +5,6 @@ import { Link } from 'react-router-dom';
 
 describe('Logo suite', function() {
   it('should have exactly one Link', () => {
-    //expect(shallow(<Logo />).find(Link)).toHaveLength(1)
+    expect(shallow(<Logo />).find(Link)).toHaveLength(1)
   });
 })
