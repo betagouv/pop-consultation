@@ -1,6 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { image } from "../../image";
+import mdf from "../../../../assets/musee-de-france.jpg";
+import inv from "../../../../assets/inventaire.jpg";
 
 import mdf from "../../../../assets/musee-de-france.jpg";
 import inv from "../../../../assets/inventaire.jpg";
@@ -95,8 +97,8 @@ const Palissy = ({ data }) => {
   const title = data.TICO || data.TITR;
   const ref = data.REF;
   const categories = data.DENO ? data.DENO.join(", ") : "";
-  const author = data.AUTR;
-  const siecle = data.SCLE;
+  const author = data.AUTR ? data.AUTR.join(", ") : "";
+  const siecle = data.SCLE ? data.SCLE.join(", ") : "";
   const loc = data.LOCA
     ? joinData([data.LOCA])
     : joinData([data.REG, data.DPT, data.COM]);
@@ -123,7 +125,11 @@ const Palissy = ({ data }) => {
             {ref}
           </span>
         </div>
-        {data.PRODUCTEUR === "Inventaire" ? <img src={inv} className="producteur" /> : <div/>}
+        {data.PRODUCTEUR === "Inventaire" ? (
+          <img src={inv} className="producteur" />
+        ) : (
+          <div />
+        )}
         <div>
           <p>{author}</p>
           <p>{siecle}</p>
@@ -138,8 +144,8 @@ const Merimee = ({ data }) => {
   const title = data.TICO || data.TITR;
   const ref = data.REF;
   const categories = data.DENO ? data.DENO.join(", ") : "";
-  const author = data.AUTR;
-  const siecle = data.SCLE;
+  const author = data.AUTR ? data.AUTR.join(", ") : "";
+  const siecle = data.SCLE ? data.SCLE.join(", ") : "";
   const loc = data.LOCA
     ? joinData([data.LOCA])
     : joinData([data.REG, data.DPT, data.COM]);
@@ -166,7 +172,11 @@ const Merimee = ({ data }) => {
             {ref}
           </span>
         </div>
-        {data.PRODUCTEUR === "Inventaire" ? <img src={inv} className="producteur" /> : <div/>}
+        {data.PRODUCTEUR === "Inventaire" ? (
+          <img src={inv} className="producteur" />
+        ) : (
+          <div />
+        )}
         <div>
           <p>{author}</p>
           <p>{siecle}</p>
