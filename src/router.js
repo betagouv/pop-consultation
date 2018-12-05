@@ -34,7 +34,6 @@ import mosaiqueCardStyles from "./scenes/search/subComponents/Mosaique/CardMosai
 import noticeStyles from './scenes/notice/index.css';
 import titleNoticeStyles from "./scenes/notice/components/title.css";
 import fieldNoticeStyles from "./scenes/notice/components/field.css";
-import headerNoticeStyles from "./scenes/notice/components/header.css";
 import fieldImagesStyles from "./scenes/notice/components/fieldImages.css";
 import noticeMapStyles from "./scenes/notice/components/map.css";
 import linkedNoticesStyles from "./scenes/notice/components/LinkedNotices.css";
@@ -92,7 +91,6 @@ export default withStyles(
   noticeStyles,
   titleNoticeStyles,
   fieldNoticeStyles,
-  headerNoticeStyles,
   fieldImagesStyles,
   noticeMapStyles,
   linkedNoticesStyles,

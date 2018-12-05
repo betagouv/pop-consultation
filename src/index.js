@@ -8,6 +8,7 @@ import { BrowserRouter } from "react-router-dom";
 import registerServiceWorker from "./registerServiceWorker";
 import createStore from "./redux/store";
 import PublicRoutes from "./router";
+import ContextProvider from "./ContextProvider";
 
 const { store, history } = createStore();
 
@@ -28,26 +29,11 @@ WebFont.load({
   }
 });
 
-import PropTypes from "prop-types";
-class ContextProvider extends React.Component {
-  static childContextTypes = {
-    insertCss: PropTypes.func
-  };
-  getChildContext() {
-    return { ...this.props.context };
-  }
-
-  render() {
-    return React.cloneElement(this.props.children, { ...this.props });
-  }
-}
-
 const css = new Set(); // CSS for all rendered React components
 const injectCssContext = {
   insertCss: (...styles) => {
     return styles.forEach(style => {
         if(style) {
-          // console.log(style._getCss())
           css.add(style._getCss());
         }
     })

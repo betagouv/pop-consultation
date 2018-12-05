@@ -9,6 +9,7 @@ import { StaticRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import createStore from "./../src/redux/store";
 import PublicRoutes from "./../src/router";
+import ContextProvider from "./../src/ContextProvider";
 
 async function exec(req, res) {
   const css = new Set(); // CSS for all rendered React components
@@ -16,7 +17,6 @@ async function exec(req, res) {
     insertCss: (...styles) => {
       return styles.forEach(style => {
           if(style) {
-            //console.log(style._getCss())
             css.add(style._getCss());
           }
       })
@@ -42,27 +42,22 @@ async function exec(req, res) {
       console.error("Something went wrong:", err);
       return res.status(500).send("Oops, better luck next time!");
     }
-    return res.send(
+
+    let status = 404;
+    if (
+      /\/notice\/(merimee|palissy|mnr|joconde|memoire)\/\w+/.test(req.url) ||
+      /\/search\/(list|map|mosaique)/.test(req.url) ||
+      /\/opendata/.test(req.url)
+    ) {
+      status = 200;
+    }
+    return res.status(status).send(
       data
         .replace('<div id="root"></div>', `<div id="root">${body}</div>`)
         .replace("</head>", ` <style type="text/css">${cssString}</style></head>`) //TODO pas ouf le replace </head>
     );
 
   });
-}
-
-import PropTypes from "prop-types";
-class ContextProvider extends React.Component {
-  static childContextTypes = {
-    insertCss: PropTypes.func
-  };
-  getChildContext() {
-    return { ...this.props.context };
-  }
-
-  render() {
-    return React.cloneElement(this.props.children, { ...this.props });
-  }
 }
 
 module.exports = exec;
