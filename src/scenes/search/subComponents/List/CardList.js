@@ -4,9 +4,6 @@ import { image } from "../../image";
 import mdf from "../../../../assets/musee-de-france.jpg";
 import inv from "../../../../assets/inventaire.jpg";
 
-import mdf from "../../../../assets/musee-de-france.jpg";
-import inv from "../../../../assets/inventaire.jpg";
-
 const joinData = f => {
   return f
     .map(x => {
