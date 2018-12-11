@@ -339,7 +339,6 @@ class Search extends React.Component {
                                       "TITR^9",
                                       "LEG^9",
                                       "LOCA^9",
-                                      "AUTI^8",
                                       "DENO^8",
                                       "DOMN^8",
                                       "EDIF^8",
