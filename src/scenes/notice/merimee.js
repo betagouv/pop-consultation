@@ -2,13 +2,14 @@ import React from "react";
 import { Row, Col, Container } from "reactstrap";
 import Field from "./components/field";
 import LinkedNotices from "./components/LinkedNotices";
-import Header from "./components/header";
 import Title from "./components/title";
 import Loader from "../../components/loader";
 import API from "../../services/api";
 import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
-import { postFixedLink } from "./utils";
+import FieldImages from "./components/fieldImages";
+import Map from "./components/map";
+import { postFixedLink, toFieldImages, hasCoordinates } from "./utils";
 
 class Merimee extends React.Component {
   state = {
@@ -73,6 +74,37 @@ class Merimee extends React.Component {
     });
   }
 
+  renderHeader() {
+      const images = toFieldImages(this.state.notice.MEMOIRE);
+      const showMap = hasCoordinates(this.state.notice.POP_COORDONNEES);
+      const externalImages = false;
+      const showImages = images.length;
+      const cols = [];
+      if (!showMap && !showImages) {
+        return <div />;
+      }
+      if (showImages) {
+        cols.push(
+          <Col key="fieldImages" className="image" sm={showMap ? 6 : 12}>
+            <FieldImages
+              images={images}
+              disabled
+              name={`${this.state.notice.DOMN ? this.state.notice.DOMN.join(" ") : ""} + ${this.state.notice.TICO || this.state.notice.TITR}`}
+              external={externalImages}
+            />
+          </Col>
+        );
+      }
+      if (showMap) {
+        cols.push(
+          <Col key="Map" className="image" sm={showImages ? 6 : 12}>
+            <Map notice={this.state.notice} />
+          </Col>
+        );
+      }
+      return <Row>{cols}</Row>;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -92,11 +124,7 @@ class Merimee extends React.Component {
         </Row>
         <Row>
           <Col sm="9">
-            <Header
-              notice={this.state.notice}
-              externalImages={false}
-              images={this.state.notice.MEMOIRE}
-            />
+            { this.renderHeader() }
             <Row>
               <Col sm="12">
                 <div className="notice-details">

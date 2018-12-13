@@ -5,9 +5,10 @@ import NotFound from "../../components/NotFound";
 import LinkedNotices from "./components/LinkedNotices";
 import Title from "./components/title";
 import Loader from "../../components/loader";
-import Header from "./components/header";
 import API from "../../services/api";
-import { findCollection } from "./utils";
+import FieldImages from "./components/fieldImages";
+import Map from "./components/map";
+import { findCollection, toFieldImages, hasCoordinates } from "./utils";
 import ContactUs from "./components/ContactUs";
 
 class Palissy extends React.Component {
@@ -64,6 +65,37 @@ class Palissy extends React.Component {
     });
   }
 
+  renderHeader() {
+      const images = toFieldImages(this.state.notice.MEMOIRE);
+      const showMap = hasCoordinates(this.state.notice.POP_COORDONNEES);
+      const externalImages = true;
+      const showImages = images.length;
+      const cols = [];
+      if (!showMap && !showImages) {
+        return <div />;
+      }
+      if (showImages) {
+        cols.push(
+          <Col key="fieldImages" className="image" sm={showMap ? 6 : 12}>
+            <FieldImages
+              images={images}
+              disabled
+              name={`${this.state.notice.DOMN ? this.state.notice.DOMN : ""} + ${this.state.notice.TICO || this.state.notice.TITR}`}
+              external={externalImages}
+            />
+          </Col>
+        );
+      }
+      if (showMap) {
+        cols.push(
+          <Col key="Map" className="image" sm={showImages ? 6 : 12}>
+            <Map notice={this.state.notice} />
+          </Col>
+        );
+      }
+      return <Row>{cols}</Row>;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -82,11 +114,7 @@ class Palissy extends React.Component {
         </Row>
         <Row>
           <Col sm="9">
-            <Header
-              notice={this.state.notice}
-              externalImages={true}
-              images={this.state.notice.MEMOIRE}
-            />
+            { this.renderHeader() }
             <Row>
               <Col sm="12">
                 <div className="notice-details">

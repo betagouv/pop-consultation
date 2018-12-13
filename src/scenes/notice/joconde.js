@@ -6,8 +6,10 @@ import Loader from "../../components/loader";
 import Title from "./components/title";
 import API from "../../services/api";
 import NotFound from "../../components/NotFound";
-import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
+import FieldImages from "./components/fieldImages";
+import Map from "./components/map";
+import { toFieldImages, hasCoordinates } from "./utils";
 
 class Joconde extends React.Component {
   state = {
@@ -41,6 +43,37 @@ class Joconde extends React.Component {
     });
   }
 
+  renderHeader() {
+      const images = toFieldImages(this.state.notice.IMG);
+      const showMap = hasCoordinates(this.state.notice.POP_COORDONNEES);
+      const externalImages = false;
+      const showImages = images.length;
+      const cols = [];
+      if (!showMap && !showImages) {
+        return <div />;
+      }
+      if (showImages) {
+        cols.push(
+          <Col key="fieldImages" className="image" sm={showMap ? 6 : 12}>
+            <FieldImages
+              images={images}
+              disabled
+              name={`${this.state.notice.DOMN ? this.state.notice.DOMN.join(" ") : ""} + ${this.state.notice.TICO || this.state.notice.TITR}`}
+              external={externalImages}
+            />
+          </Col>
+        );
+      }
+      if (showMap) {
+        cols.push(
+          <Col key="Map" className="image" sm={showImages ? 6 : 12}>
+            <Map notice={this.state.notice} />
+          </Col>
+        );
+      }
+      return <Row>{cols}</Row>;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -59,11 +92,7 @@ class Joconde extends React.Component {
         </Row>
         <Row>
           <Col sm="9">
-            <Header
-              notice={this.state.notice}
-              externalImages={false}
-              images={this.state.notice.IMG}
-            />
+            { this.renderHeader() }
             <Row>
               <Col sm="12">
                 <div className="notice-details">

@@ -1,6 +1,5 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
-import Header from "./components/header";
 import Field from "./components/field";
 import LinkedNotices from "./components/LinkedNotices";
 import Title from "./components/title";
@@ -8,7 +7,9 @@ import Loader from "../../components/loader";
 import API from "../../services/api";
 import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
-import { findCollection } from "./utils";
+import FieldImages from "./components/fieldImages";
+import Map from "./components/map";
+import { findCollection, toFieldImages, hasCoordinates } from "./utils";
 
 
 class Memoire extends React.Component {
@@ -57,6 +58,37 @@ class Memoire extends React.Component {
     });
   }
 
+  renderHeader() {
+      const images = toFieldImages([this.state.notice.IMG]);
+      const showMap = hasCoordinates(this.state.notice.POP_COORDONNEES);
+      const externalImages = true;
+      const showImages = images.length;
+      const cols = [];
+      if (!showMap && !showImages) {
+        return <div />;
+      }
+      if (showImages) {
+        cols.push(
+          <Col key="fieldImages" className="image" sm={showMap ? 6 : 12}>
+            <FieldImages
+              images={images}
+              disabled
+              name={`${this.state.notice.DOM ? this.state.notice.DOM : ""} + ${this.state.notice.TICO || this.state.notice.TITR}`}
+              external={externalImages}
+            />
+          </Col>
+        );
+      }
+      if (showMap) {
+        cols.push(
+          <Col key="Map" className="image" sm={showImages ? 6 : 12}>
+            <Map notice={this.state.notice} />
+          </Col>
+        );
+      }
+      return <Row>{cols}</Row>;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -75,11 +107,7 @@ class Memoire extends React.Component {
         </Row>
         <Row>
           <Col sm="9">
-            <Header
-              notice={this.state.notice}
-              images={[this.state.notice.IMG]}
-              externalImages={true}
-            />
+            { this.renderHeader() }
             <Row>
               <Col sm="12">
                 <div className="notice-details">

@@ -1,11 +1,13 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
 import Field from "./components/field";
-import Header from "./components/header";
 import Loader from "../../components/loader";
 import API from "../../services/api";
 import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
+import FieldImages from "./components/fieldImages";
+import Map from "./components/map";
+import { toFieldImages, hasCoordinates } from "./utils";
 
 class Mnr extends React.Component {
   state = {
@@ -32,6 +34,37 @@ class Mnr extends React.Component {
     API.getNotice("mnr", ref).then(notice => {
       this.setState({ loading: false, notice });
     });
+  }
+
+  renderHeader() {
+      const images = toFieldImages(this.state.notice.VIDEO);
+      const showMap = hasCoordinates(this.state.notice.POP_COORDONNEES);
+      const externalImages = false;
+      const showImages = images.length;
+      const cols = [];
+      if (!showMap && !showImages) {
+        return <div />;
+      }
+      if (showImages) {
+        cols.push(
+          <Col key="fieldImages" className="image" sm={showMap ? 6 : 12}>
+            <FieldImages
+              images={images}
+              disabled
+              name={`${this.state.notice.DOMN ? this.state.notice.DOMN.join(" ") : ""} + ${this.state.notice.TICO || this.state.notice.TITR}`}
+              external={externalImages}
+            />
+          </Col>
+        );
+      }
+      if (showMap) {
+        cols.push(
+          <Col key="Map" className="image" sm={showImages ? 6 : 12}>
+            <Map notice={this.state.notice} />
+          </Col>
+        );
+      }
+      return <Row>{cols}</Row>;
   }
 
   render() {
@@ -62,11 +95,7 @@ class Mnr extends React.Component {
         </Row>
         <Row>
           <Col sm="9">
-            <Header
-              notice={this.state.notice}
-              externalImages={false}
-              images={this.state.notice.VIDEO}
-            />
+            { this.renderHeader() }
             <Row>
               <Col className="image" sm="12">
                 <div className="notice-details">
