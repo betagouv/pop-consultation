@@ -24,8 +24,8 @@ class FieldImages extends React.Component {
       let obj = {
         original: e.source,
         thumbnail: e.source,
-        originalAlt: `${this.props.name}`,
-        thumbnailAlt: `${this.props.name} vignette `
+        originalAlt: `${this.props.name} + ${i+1}`,
+        thumbnailAlt: `${this.props.name} + ${i+1} vignette `
       };
       if (e.link) {
         obj.thumbnailLabel = (
