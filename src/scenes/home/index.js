@@ -2,6 +2,8 @@ import React from "react";
 import Slider from "react-slick";
 import { Tooltip, Button, Input } from "reactstrap";
 
+import Helmet from "../../components/Helmet";
+
 const bases = [
   {
     name: 'palissy',
@@ -220,6 +222,10 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home">
+        <Helmet 
+            title="POP - Plateforme Ouverte du Patrimoine - Ministère de la Culture"
+            description="POP propose de faire des données patrimoniales un bien commun dont il sera aussi simple de se servir que d’y contribuer. Découvrez ici tous les biens nationaux."
+        />
         {this.renderBanner()}
         <div className="home-search">
           <h1>

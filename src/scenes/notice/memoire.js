@@ -10,6 +10,7 @@ import NotFound from "../../components/NotFound";
 import FieldImages from "./components/fieldImages";
 import Map from "./components/map";
 import { findCollection, toFieldImages, hasCoordinates } from "./utils";
+import Helmet from "../../components/Helmet";
 
 
 class Memoire extends React.Component {
@@ -89,6 +90,18 @@ class Memoire extends React.Component {
       return <Row>{cols}</Row>;
   }
 
+  getMetaDescription = ()=> {
+    const titre =  this.state.notice.TICO || this.state.notice.TITR;
+    const auteur = this.state.notice.AUTP? this.state.notice.AUTP : '';
+    /* if(this.state.notice.TYPDOC && this.state.notice.TYPDOC.length === 1) {
+      const category = this.state.notice.TYPDOC[0];
+      if(category.toLowerCase().includes("phototype")) {
+        return `Découvrez ${titre}, cette photographie, réalisée par ${auteur}. Cliquez ici !`;
+      }
+    } */
+    return `Découvrez ${titre}, par ${auteur}. Cliquez ici !`;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -98,8 +111,13 @@ class Memoire extends React.Component {
       return <NotFound />;
     }
 
+    const description = this.getMetaDescription();
     return (
       <Container className="notice" fluid>
+        <Helmet
+            title={`${this.state.notice.TICO || this.state.notice.TITR} - POP`}
+            description={description}
+        />
         <Row className="top-section">
           <Col>
             <h1 className="heading">{this.state.notice.TICO}</h1>

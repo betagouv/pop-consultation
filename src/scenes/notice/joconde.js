@@ -5,6 +5,7 @@ import Field from "./components/field";
 import Loader from "../../components/loader";
 import Title from "./components/title";
 import API from "../../services/api";
+import Helmet from "../../components/Helmet";
 import NotFound from "../../components/NotFound";
 import ContactUs from "./components/ContactUs";
 import FieldImages from "./components/fieldImages";
@@ -74,6 +75,18 @@ class Joconde extends React.Component {
       return <Row>{cols}</Row>;
   }
 
+  getMetaDescription = ()=> {
+    const titre =  this.state.notice.TICO || this.state.notice.TITR;
+    const auteur = this.state.notice.AUTR? this.state.notice.AUTR : '';
+    if(this.state.notice.DOMN && this.state.notice.DOMN.length === 1) {
+      const category = this.state.notice.DOMN[0];
+      if(category.toLowerCase() === "peinture") {
+        return `Découvrez ${titre}, cette ${category}, réalisée par ${auteur}. Cliquez ici !`;
+      }
+    }
+    return `Découvrez ${titre}, par ${auteur}. Cliquez ici !`;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -83,8 +96,13 @@ class Joconde extends React.Component {
       return <NotFound />;
     }
 
+    const description = this.getMetaDescription();
     return (
       <Container className="notice" fluid>
+        <Helmet 
+            title={`${this.state.notice.TICO || this.state.notice.TITR} - POP`}
+            description={description}
+        />
         <Row className="top-section">
           <Col>
             <h1 className="heading">{this.state.notice.TICO}</h1>
