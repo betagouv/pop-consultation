@@ -43,5 +43,10 @@ describe("Joconde suite", () => {
         .find(Field)
         .filterWhere(f => f.props().content === sampleNotice.LOCA)
     ).toHaveLength(1);
+    const htmlRenderedComponent = wrapper.html();
+    expect(htmlRenderedComponent).toContain(
+      "joconde/000PE001028/96de11977.jpg"
+    );
+    expect(htmlRenderedComponent).toContain("Van Ouwenhuysen Constant");
   });
 });
