@@ -1,6 +1,7 @@
 import React from "react";
 import { Row, Col, Container } from "reactstrap";
 import Field from "./components/field";
+import Helmet from "../../components/Helmet";
 import NotFound from "../../components/NotFound";
 import LinkedNotices from "./components/LinkedNotices";
 import Title from "./components/title";
@@ -64,6 +65,18 @@ class Palissy extends React.Component {
     });
   }
 
+  getMetaDescription = ()=> {
+    const titre =  this.state.notice.TICO || this.state.notice.TITR;
+    const auteur = this.state.notice.AUTR? this.state.notice.AUTR.join(' ') : '';
+    if(this.state.notice.CATE && this.state.notice.CATE.length === 1) {
+      const category = this.state.notice.CATE[0];
+      if(category.toLowerCase() === "sculpture") {
+        return `Découvrez ${titre}, cette ${category}, réalisée par ${auteur}. Cliquez ici !`;
+      }
+    }
+    return `Découvrez ${titre}, par ${auteur}. Cliquez ici !`;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -73,8 +86,13 @@ class Palissy extends React.Component {
       return <NotFound />;
     }
 
+    const description = this.getMetaDescription();
     return (
       <Container className="notice" fluid>
+        <Helmet
+            title={`${this.state.notice.TICO || this.state.notice.TITR} - POP`}
+            description={description}
+        />
         <Row className="top-section">
           <Col>
             <h1 className="heading">{this.state.notice.TICO}</h1>

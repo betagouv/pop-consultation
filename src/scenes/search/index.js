@@ -21,6 +21,7 @@ import {
 import classnames from "classnames";
 import { MultiList } from "pop-shared";
 
+import Helmet from "../../components/Helmet";
 import List from "./subComponents/List";
 import Map from "./subComponents/Map";
 import Mosaique from "./subComponents/Mosaique";
@@ -161,8 +162,12 @@ class Search extends React.Component {
 
     return (
       <div className="search">
+        <Helmet 
+            title="Recherche - POP - Plateforme Ouverte du Patrimoine"
+            description="Effectuer une recherche sur POP. Découvrez le moteur de cherche qui vous aidera à trouver facilement ce que vous recherchez sur POP."
+        />
         <Container fluid style={{ maxWidth: 1860 }}>
-          <h2 className="title">Votre recherche</h2>
+          <h1 className="title">Votre recherche</h1>
           <ReactiveBase url={`${es_url}`} app={bases}>
             <Row>
               <div className={`search-filters ${this.state.mobile_menu}`}>
@@ -334,20 +339,20 @@ class Search extends React.Component {
                                     type: "most_fields",
                                     fields: [
                                       "TICO^10",
+                                      "AUTR^10",
                                       "TITRE^9",
                                       "TITR^9",
                                       "LEG^9",
-                                      "AUTI^8",
-                                      "DENO^5",
-                                      "REPR^5",
+                                      "LOCA^9",
+                                      "DENO^8",
+                                      "DOMN^8",
+                                      "EDIF^8",
+                                      "OBJT^8",
+                                      "REPR^8",
+                                      "AUTP^7",
+                                      "SERIE^7",
                                       "PDEN^5",
-                                      "AUTR^4",
-                                      "AUTP^4",
                                       "PERS^4",
-                                      "EDIF^4",
-                                      "OBJT^4",
-                                      "SERIE^4",
-                                      "LOCA^7",
                                       "PAYS^3",
                                       "REG^3",
                                       "DEP^3",

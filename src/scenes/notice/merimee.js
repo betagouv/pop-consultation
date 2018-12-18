@@ -7,6 +7,7 @@ import Title from "./components/title";
 import Loader from "../../components/loader";
 import API from "../../services/api";
 import ContactUs from "./components/ContactUs";
+import Helmet from "../../components/Helmet";
 import NotFound from "../../components/NotFound";
 import { postFixedLink } from "./utils";
 
@@ -73,6 +74,18 @@ class Merimee extends React.Component {
     });
   }
 
+  getMetaDescription = ()=> {
+    const titre =  this.state.notice.TICO || this.state.notice.TITR;
+    const datation = this.state.notice.SCLE? this.state.notice.SCLE.join(' ') : '';
+    if(this.state.notice.DENO && this.state.notice.DENO.length === 1) {
+      const category = this.state.notice.DENO[0];
+      if(category.toLowerCase() === "église") {
+        return `Découvrez ${titre}, cette ${category} du ${datation}. Cliquez ici !`;
+      }
+    }
+    return `Découvrez ${titre}, du ${datation}. Cliquez ici !`;
+  }
+
   render() {
     if (this.state.loading) {
       return <Loader />;
@@ -82,9 +95,13 @@ class Merimee extends React.Component {
       return <NotFound />;
     }
 
-    console.log(this.state.notice);
+    const description = this.getMetaDescription();
     return (
       <Container className="notice" fluid>
+        <Helmet
+            title={`${this.state.notice.TICO || this.state.notice.TITR} - POP`}
+            description={description}
+        />
         <Row className="top-section">
           <Col>
             <h1 className="heading">{this.state.notice.TICO}</h1>
