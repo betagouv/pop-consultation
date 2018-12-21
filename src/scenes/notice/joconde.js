@@ -41,7 +41,7 @@ class Joconde extends React.Component {
     const { notice } = this.props;
     const title = notice.TICO || notice.TITR;
     const auteur = notice.AUTR ? notice.AUTR : "";
-    if (notice.DOMN && notice.DOMN.length === 1) {
+    if (notice.DOMN && notice.DOMN.length) {
       const category = notice.DOMN[0];
       if (category.toLowerCase() === "peinture") {
         return {
@@ -70,17 +70,20 @@ class Joconde extends React.Component {
     if (!notice) {
       return <NotFound />;
     }
-
-    console.log("notice", notice);
-
     const meta = this.getMeta();
+
     const obj = {
-      name: "TITR",
+      name: notice.TITR,
       created_at: notice.PERI.length ? notice.PERI[0] : "",
       artform: notice.DOMN.length ? notice.DOMN[0] : "",
-      image: notice.IMG.length ? `https://s3.eu-west-3.amazonaws.com/pop-phototeque-staging/${notice.IMG[0]}` : "",
+      image: notice.IMG.length
+        ? `https://s3.eu-west-3.amazonaws.com/pop-phototeque/${notice.IMG[0]}`
+        : "",
       description: notice.DESC,
-      artMedium : notice.TECH.join(', ')
+      artMedium: notice.TECH.join(", "),
+      creator: notice.AUTR.split(";"),
+      comment: notice.COMM,
+      contentLocation: notice.LOCA
     };
     return (
       <Container className="notice" fluid>

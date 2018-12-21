@@ -8,6 +8,7 @@ import API from "../../services/api";
 import ContactUs from "./components/ContactUs";
 import NotFound from "../../components/NotFound";
 import Helmet from "../../components/Helmet";
+import { schema } from "./utils.js";
 
 class Mnr extends React.Component {
   state = {

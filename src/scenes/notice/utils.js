@@ -57,10 +57,10 @@ export function schema({
   image,
   description,
   artMedium,
-  artworkSurface,
-  alternateName
+  alternateName,
+  creator,
+  comment
 }) {
-
   const obj = {};
   obj["@context"] = "http://schema.org";
   obj["@type"] = "VisualArtwork";
@@ -70,12 +70,11 @@ export function schema({
   obj["artform"] = artform;
   obj["image"] = image;
   obj["description"] = description;
-  obj["creator"] = [
-    {
-      "@type": "Person",
-      name: "HERVIER Louis Adolphe ( )"
-    }
-  ];
+  obj["creator"] = (creator || []).map(name => {
+    return { "@type": "Person", name: name.trim() };
+  });
+  obj["comment"] = comment;
+
   obj["width"] = [
     {
       "@type": "Distance",

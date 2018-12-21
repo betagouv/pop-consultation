@@ -10,6 +10,7 @@ import Loader from "../../components/loader";
 import Header from "./components/header";
 import API from "../../services/api";
 import ContactUs from "./components/ContactUs";
+import { schema } from "./utils.js";
 
 class Palissy extends React.Component {
   state = {
