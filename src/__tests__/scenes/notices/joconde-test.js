@@ -1,17 +1,10 @@
 import React from "react";
-import { shallow } from "enzyme";
-import createStore from "../../../redux/store";
+import { mount } from "enzyme";
+import configureStore from "redux-mock-store";
 import Joconde from "../../../scenes/notice/joconde";
 import Title from "../../../scenes/notice/components/title";
 import Field from "../../../scenes/notice/components/field";
 import sampleNotice from "../../__notices__/joconde-1";
-
-import configureStore from 'redux-mock-store' //ES6 modules
-
-const { store: realStore, history } = createStore();
-const middlewares = [];
-const mockStore = configureStore(middlewares);
-const store = mockStore(realStore.getState());
 
 const placeholderParams = {
   params: { ref: "x" },
@@ -21,27 +14,20 @@ const placeholderParams = {
 };
 
 const headingText = wrapper => wrapper.find(".heading").text();
+const mockStore = configureStore();
 
 describe("Joconde suite", () => {
   it("should work with a simple notice", () => {
-
-    Joconde.prototype.load = jest.fn(function(_ref) {
-      this.setState({
-        loading: false,
-        notice: { TICO: "the TICO value", IMG: [] }
-      });
+    const store = mockStore({
+      app: { notice: { TICO: "the TICO value", IMG: [] } }
     });
-    let wrapper = shallow(<Joconde match={placeholderParams} store={store} />).dive();
-    //expect(wrapper).toMatchSnapshot();
-    //expect(wrapper.length).toEqual(1);
-    //expect(headingText(wrapper)).toContain("the TICO value");
+    const wrapper = mount(<Joconde match={placeholderParams} store={store} />);
+    expect(headingText(wrapper)).toContain("the TICO value");
   });
 
-  /*it("should work with a real notice", () => {
-    Joconde.prototype.load = jest.fn(function(_ref) {
-      this.setState({ loading: false, notice: sampleNotice });
-    });
-    let wrapper = shallow(<Joconde match={placeholderParams} />);
+  it("should work with a real notice", () => {
+    const store = mockStore({ app: { notice: sampleNotice } });
+    const wrapper = mount(<Joconde match={placeholderParams} store={store} />);
     expect(headingText(wrapper)).toContain(sampleNotice.TICO);
     expect(wrapper.find(Title)).toHaveLength(4);
     expect(
@@ -59,5 +45,5 @@ describe("Joconde suite", () => {
       "joconde/000PE001028/96de11977.jpg"
     );
     expect(htmlRenderedComponent).toContain("Van Ouwenhuysen Constant");
-  });*/
+  });
 });

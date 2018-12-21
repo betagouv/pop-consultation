@@ -1,12 +1,12 @@
 export default {
   POP_COORDONNEES: {
-    lat: 48.859903,
-    lon: 2.340929
+    lat: 0,
+    lon: 0
   },
   PRODUCTEUR: "MUSEE",
   BASE: "Collections des musées de France (Joconde)",
   CONTIENT_IMAGE: "oui",
-  POP_CONTIENT_GEOLOCALISATION: "oui",
+  POP_CONTIENT_GEOLOCALISATION: "non",
   POP_IMPORT: [],
   REFMIS: "",
   ADPT: [],
