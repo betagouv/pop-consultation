@@ -1,7 +1,7 @@
 import { bucket_url } from "../../config";
 
 export function findCollection(ref = "") {
-  if(typeof ref !== 'string') {
+  if (typeof ref !== "string") {
     return "";
   }
   const prefix = ref.substring(0, 2);
@@ -48,6 +48,48 @@ export function toFieldImages(images) {
       return { source, key, link };
     })
     .filter(e => e.source);
+}
+
+export function schema({
+  name,
+  created_at,
+  artform,
+  image,
+  description,
+  artMedium,
+  artworkSurface,
+  alternateName
+}) {
+
+  const obj = {};
+  obj["@context"] = "http://schema.org";
+  obj["@type"] = "VisualArtwork";
+  obj["name"] = name;
+  obj["alternateName"] = alternateName;
+  obj["dateCreated"] = created_at;
+  obj["artform"] = artform;
+  obj["image"] = image;
+  obj["description"] = description;
+  obj["creator"] = [
+    {
+      "@type": "Person",
+      name: "HERVIER Louis Adolphe ( )"
+    }
+  ];
+  obj["width"] = [
+    {
+      "@type": "Distance",
+      name: "55cm"
+    }
+  ];
+  obj["height"] = [
+    {
+      "@type": "Distance",
+      name: "42cm"
+    }
+  ];
+  obj["artMedium"] = artMedium;
+  return JSON.stringify(obj);
 }
 
 export function hasCoordinates(point) {

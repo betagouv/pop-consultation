@@ -4,6 +4,7 @@ let api_url = "http://127.0.0.1:3000";
 let es_url = "http://127.0.0.1:3000/search/";
 let bucket_url = "https://s3.eu-west-3.amazonaws.com/pop-phototeque-dev/";
 
+env = "staging"
 switch (env) {
   case "production":
     // Certaines personnes du ministère utilisent encore l'addresse EB car ils n'ont pas accès a l'adresse en culture.gouv.fr

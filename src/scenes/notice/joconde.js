@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 import { Row, Col, Container } from "reactstrap";
 import LinkedNotices from "./components/LinkedNotices";
 import Field from "./components/field";
@@ -11,6 +11,8 @@ import NotFound from "../../components/NotFound";
 import Header from "./components/header";
 import ContactUs from "./components/ContactUs";
 
+import { schema } from "./utils.js";
+
 class Joconde extends React.Component {
   state = {
     loading: false,
@@ -19,7 +21,7 @@ class Joconde extends React.Component {
 
   componentDidMount() {
     const { match, fetchNotice, notice } = this.props;
-    if(notice === null) {
+    if (notice === null) {
       this.setState({ loading: true });
       fetchNotice(match.params.ref, false);
     }
@@ -28,32 +30,36 @@ class Joconde extends React.Component {
   componentDidUpdate(prevProps) {
     const { notice } = this.props;
     const { notice: prevNotice } = prevProps;
-    if(notice !== null && notice !== prevNotice) {
+    if (notice !== null && notice !== prevNotice) {
       this.setState({
-        loading: false,
+        loading: false
       });
     }
   }
 
-  getMeta = ()=> {
+  getMeta = () => {
     const { notice } = this.props;
-    const title =  notice.TICO || notice.TITR;
-    const auteur = notice.AUTR? notice.AUTR : '';
-    if(notice.DOMN && notice.DOMN.length === 1) {
+    const title = notice.TICO || notice.TITR;
+    const auteur = notice.AUTR ? notice.AUTR : "";
+    if (notice.DOMN && notice.DOMN.length === 1) {
       const category = notice.DOMN[0];
-      if(category.toLowerCase() === "peinture") {
+      if (category.toLowerCase() === "peinture") {
         return {
-          title: title? `${title} - POP` : `${notice.REF} - POP`,
-          description: `Découvrez ${title? title : notice.REF}, cette ${category}, réalisée par ${auteur}. Cliquez ici !`,
-        }
+          title: title ? `${title} - POP` : `${notice.REF} - POP`,
+          description: `Découvrez ${
+            title ? title : notice.REF
+          }, cette ${category}, réalisée par ${auteur}. Cliquez ici !`
+        };
       }
     }
 
     return {
-      title: title? `${title} - POP` : `${notice.REF} - POP`,
-      description: `Découvrez ${title? title : notice.REF}, par ${auteur}. Cliquez ici !`,
-    }
-  }
+      title: title ? `${title} - POP` : `${notice.REF} - POP`,
+      description: `Découvrez ${
+        title ? title : notice.REF
+      }, par ${auteur}. Cliquez ici !`
+    };
+  };
 
   render() {
     if (this.state.loading) {
@@ -64,13 +70,24 @@ class Joconde extends React.Component {
     if (!notice) {
       return <NotFound />;
     }
-    
+
+    console.log("notice", notice);
+
     const meta = this.getMeta();
+    const obj = {
+      name: "TITR",
+      created_at: notice.PERI.length ? notice.PERI[0] : "",
+      artform: notice.DOMN.length ? notice.DOMN[0] : "",
+      image: notice.IMG.length ? `https://s3.eu-west-3.amazonaws.com/pop-phototeque-staging/${notice.IMG[0]}` : "",
+      description: notice.DESC,
+      artMedium : notice.TECH.join(', ')
+    };
     return (
       <Container className="notice" fluid>
-        <Helmet 
+        <Helmet
           title={meta.title}
           description={meta.description}
+          schema={schema(obj)}
         />
         <Row className="top-section">
           <Col>
@@ -126,14 +143,8 @@ class Joconde extends React.Component {
                     title="Domaine (catégorie du bien)"
                     content={notice.DOMN}
                   />
-                  <Field
-                    title="Dénomination du bien"
-                    content={notice.DENO}
-                  />
-                  <Field
-                    title="Appellation"
-                    content={notice.APPL}
-                  />
+                  <Field title="Dénomination du bien" content={notice.DENO} />
+                  <Field title="Appellation" content={notice.APPL} />
                   <Field title="Titre" content={notice.TITR} />
                   <Field
                     title="Auteur / exécutant / collecteur"
@@ -144,10 +155,7 @@ class Joconde extends React.Component {
                     content={notice.PAUT}
                   />
                   <Field title="Ecole" content={notice.ECOL} />
-                  <Field
-                    title="Anciennes attributions"
-                    content={notice.ATTR}
-                  />
+                  <Field title="Anciennes attributions" content={notice.ATTR} />
                   <Field
                     title="Période de création / exécution"
                     content={notice.PERI}
@@ -170,26 +178,14 @@ class Joconde extends React.Component {
                     content={notice.TECH}
                   />
                   <Field title="Mesures" content={notice.DIMS} />
-                  <Field
-                    title="Inscriptions"
-                    content={notice.INSC}
-                  />
+                  <Field title="Inscriptions" content={notice.INSC} />
                   <Field
                     title="Précisions sur les inscriptions"
                     content={notice.PINS}
                   />
-                  <Field
-                    title="Onomastique"
-                    content={notice.ONOM}
-                  />
-                  <Field
-                    title="Description"
-                    content={notice.DESC}
-                  />
-                  <Field
-                    title="Etat du bien"
-                    content={notice.ETAT}
-                  />
+                  <Field title="Onomastique" content={notice.ONOM} />
+                  <Field title="Description" content={notice.DESC} />
+                  <Field title="Etat du bien" content={notice.ETAT} />
                   <Field
                     title="Sujet représenté"
                     content={notice.REPR}
@@ -238,10 +234,7 @@ class Joconde extends React.Component {
                     title="Précisions sur le lieu de création / d’exécution / d’utilisation"
                     content={notice.PLIEUX}
                   />
-                  <Field
-                    title="Géographie historique"
-                    content={notice.GEOHI}
-                  />
+                  <Field title="Géographie historique" content={notice.GEOHI} />
                   <Field
                     title="Utilisation / Destination"
                     content={notice.UTIL}
@@ -250,26 +243,17 @@ class Joconde extends React.Component {
                     title="Précisions sur l’utilisation"
                     content={notice.PUTI}
                   />
-                  <Field
-                    title="Période d’utilisation"
-                    content={notice.PERU}
-                  />
+                  <Field title="Période d’utilisation" content={notice.PERU} />
                   <Field
                     title="Millésime d’utilisation"
                     content={notice.MILU}
                   />
-                  <Field
-                    title="Découverte / collecte"
-                    content={notice.DECV}
-                  />
+                  <Field title="Découverte / collecte" content={notice.DECV} />
                   <Field
                     title="Précisions sur la découverte / collecte / récolte"
                     content={notice.PDEC}
                   />
-                  <Field
-                    title="Numéro de site"
-                    content={notice.NSDA}
-                  />
+                  <Field title="Numéro de site" content={notice.NSDA} />
                   <Title
                     content="Informations juridiques"
                     notice={notice}
@@ -283,14 +267,8 @@ class Joconde extends React.Component {
                       "LOCA"
                     ]}
                   />
-                  <Field
-                    title="Statut juridique"
-                    content={notice.STAT}
-                  />
-                  <Field
-                    title="Date d’acquisition"
-                    content={notice.DACQ}
-                  />
+                  <Field title="Statut juridique" content={notice.STAT} />
+                  <Field title="Date d’acquisition" content={notice.DACQ} />
                   <Field
                     title="Ancienne appartenance"
                     content={notice.APTN}
@@ -309,10 +287,7 @@ class Joconde extends React.Component {
                     title="Ancien dépôt / changement d’affectation"
                     content={notice.ADPT}
                   />
-                  <Field
-                    title="Localisation"
-                    content={notice.LOCA}
-                  />
+                  <Field title="Localisation" content={notice.LOCA} />
                   <Title
                     content="Informations complémentaires"
                     notice={notice}
@@ -323,10 +298,7 @@ class Joconde extends React.Component {
                     content={notice.COMM}
                     separator="#"
                   />
-                  <Field
-                    title="Exposition"
-                    content={notice.EXPO}
-                  />
+                  <Field title="Exposition" content={notice.EXPO} />
                   <Field
                     title="Bibliographie"
                     content={notice.BIBL}
@@ -343,18 +315,9 @@ class Joconde extends React.Component {
               <hr />
               <div>
                 <Field title="Référence" content={notice.REF} />
-                <Field
-                  title="Date de création"
-                  content={notice.DMIS}
-                />
-                <Field
-                  title="Dernière mise à jour"
-                  content={notice.DMAJ}
-                />
-                <Field
-                  title="Crédits photographiques"
-                  content={notice.AUTP}
-                />
+                <Field title="Date de création" content={notice.DMIS} />
+                <Field title="Dernière mise à jour" content={notice.DMAJ} />
+                <Field title="Crédits photographiques" content={notice.AUTP} />
                 <Field
                   title="Auteur de l'oeuvre ou de l'original"
                   content={notice.AUTOR}
@@ -362,10 +325,7 @@ class Joconde extends React.Component {
                 <Field title="" content={notice.COPY} />
               </div>
 
-              <ContactUs
-                contact={notice.CONTACT}
-                reference={notice.REF}
-              />
+              <ContactUs contact={notice.CONTACT} reference={notice.REF} />
             </div>
 
             <SeeMore notice={notice} />
@@ -429,20 +389,19 @@ const SeeMore = ({ notice }) => {
 
 //http://www2.culture.gouv.fr/public/mistral/museo_fr?ACTION=CHERCHER&FIELD_98=REF&VALUE_98=M5027
 
-
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   notice: state.app.notice
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   fetchNotice: (ref, withLinks) => {
     dispatch({
       type: "notice/WILL_FETCH",
       ref,
       withLinks,
-      base: "joconde",
+      base: "joconde"
     });
-  },
+  }
 });
 
 export default connect(
