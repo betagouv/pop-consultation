@@ -69,9 +69,27 @@ class Merimee extends React.Component {
     }
 
     const meta = this.getMeta();
+
+    console.log("notice", notice);
+    const obj = {
+      name: notice.TICO,
+      created_at: notice.SCLE.length ? notice.SCLE[9] : "",
+      artform: "Architecture",
+      image: notice.MEMOIRE.length ? notice.MEMOIRE[0].url : "",
+      description: notice.LEG
+      // artMedium: notice.TECH.join(", "),
+      // creator: notice.AUTR.split(";"),
+      // comment: notice.COMM,
+      // contentLocation: notice.LOCA
+    };
+
     return (
       <Container className="notice" fluid>
-        <Helmet title={meta.title} description={meta.description} />
+        <Helmet
+          title={meta.title}
+          description={meta.description}
+          schema={schema(obj)}
+        />
         <Row className="top-section">
           <Col>
             <h1 className="heading">{notice.TICO}</h1>

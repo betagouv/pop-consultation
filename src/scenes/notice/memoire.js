@@ -61,26 +61,23 @@ class Memoire extends React.Component {
 
     const meta = this.getMeta();
 
-    console.log("NN", notice);
-    const obj = {
-      name: notice.TICO,
-      created_at: notice.DATPV,
-      artform: notice.DOM,
-      image: notice.IMG,
-      description: notice.LEG,
-      // artMedium: notice.TECH.join(", "),
-      // creator: notice.AUTR.split(";"),
-      // comment: notice.COMM,
-      // contentLocation: notice.LOCA
-    };
+    // maybe to do. Not sure about it
+
+    // const obj = {
+    //   name: notice.TICO,
+    //   created_at: notice.DATPV,
+    //   artform: notice.DOM,
+    //   image: notice.IMG,
+    //   description: notice.LEG,
+    //   // artMedium: notice.TECH.join(", "),
+    //   // creator: notice.AUTR.split(";"),
+    //   // comment: notice.COMM,
+    //   // contentLocation: notice.LOCA
+    // };
 
     return (
       <Container className="notice" fluid>
-        <Helmet
-          title={meta.title}
-          description={meta.description}
-          schema={schema(obj)}
-        />
+        <Helmet title={meta.title} description={meta.description} />
         <Row className="top-section">
           <Col>
             <h1 className="heading">{notice.TICO}</h1>

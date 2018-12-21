@@ -64,11 +64,23 @@ class Mnr extends React.Component {
     }
     
     const meta = this.getMeta();
+    const obj = {
+      name: notice.TICO,
+      created_at: notice.DATPV,
+      artform: notice.DOM,
+      image: notice.IMG,
+      description: notice.LEG
+      // artMedium: notice.TECH.join(", "),
+      // creator: notice.AUTR.split(";"),
+      // comment: notice.COMM,
+      // contentLocation: notice.LOCA
+    };
     return (
       <Container className="notice" fluid>
         <Helmet 
           title={meta.title}
           description={meta.description}
+          schema={schema(obj)}
         />
         <Row className="top-section">
           <Col>
