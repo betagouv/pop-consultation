@@ -1,0 +1,19 @@
+.museo {
+  padding: 15px;
+  margin: 50px auto;
+  max-width: 800px;
+}
+.museo h1 {
+  color: #025d59;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.museo dl > dt {
+  color: #025d59;
+  margin-top: 15px;
+}
+
+.museo-map {
+  margin-bottom: 25px;
+  margin-top: 25px;
+}
